@@ -181,7 +181,7 @@ dialog.rest-dialogo .acc { display: flex; gap: 10px; margin-top: 14px; justify-c
 
 /* Origen del pedido (008): web, pantalla del local; «Pagar en caja» y nota para cocina */
 .rp-tag.origen-web { background: color-mix(in srgb, var(--d-s1, #4a90e2) 30%, transparent); color: #a9cdfb; }
-.rp-tag.origen-pantalla { background: color-mix(in srgb, var(--fx-accent) 30%, transparent); color: var(--fx-accent); }
+.rp-tag.origen-pantalla { background: color-mix(in srgb, var(--fx-accent) 30%, transparent); color: var(--fx-pop); }
 .rp-tag.caja { background: transparent; border: 1px solid currentColor; }
 .rp-item.de-pantalla { border-color: color-mix(in srgb, var(--fx-accent) 55%, transparent); }
 .rp-nota { font-weight: 700; }
