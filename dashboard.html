@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#121212">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&amp;family=Barlow:wght@400;600;700;800&amp;display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&amp;family=Barlow:wght@400;600;700;800&amp;display=swap"></noscript>
+<link rel="stylesheet" href="estilos/base.css">
+<link rel="stylesheet" href="efectos/base.css">
+<link rel="stylesheet" href="efectos/energia.css">
+<link rel="stylesheet" href="efectos/escaparate.css">
+<style>:root { --fx-bg: #F2F0EA; --fx-paper: #FAF8F3; --fx-accent: #E1AC25; --fx-ink: #121212; --fx-deep: #1A1A1A; --fx-pop: #E1AC25; --fx-font: "Barlow", "Arial Narrow", Arial, sans-serif; --fx-font-disp: "Oswald", Impact, "Arial Narrow", sans-serif; --fx-font-txt: "Barlow", "Arial Narrow", Arial, sans-serif; --fx-deep-2: #121212; --fx-line-deep: #2E2E2E; --fx-soft: #D9D6CF; --fx-soft-2: #A9A59D; --fx-warm: #E60202; --fx-chat: #ECE7DD; }</style>
+
+<title>Dashboard del dueño · Big Burger (Premium)</title>
+<meta name="description" content="Dashboard en vivo de Big Burger: cuántas burgers se venden, qué queda en stock y cómo te piden.">
+<link rel="stylesheet" href="modulos/restaurante/rest.css">
+<link rel="stylesheet" href="modulos/restaurante/rest-panel.css">
+</head>
+<body class="rest-oscuro" data-pagina="Dashboard del dueño (Premium)" data-secciones='["Resumen de hoy", "Hamburguesas por hora", "Cómo te piden", "Qué se vende y qué queda", "Movimientos en vivo", "Últimos 7 días", "Equipo", "Pedidos de la web"]'>
+<header class="cabecera"><div class="wrap">
+  <a class="marca" href="index.html"><img src="assets/logo.webp" alt="" width="52" height="52"><span><b>Big Burger</b><small>Dashboard del dueño</small></span></a>
+  <nav aria-label="Pantallas del local"><a href="personal.html">Pantalla de ventas</a><a href="index.html">La página</a></nav>
+</div></header>
+<main class="rest-panel" id="rd-raiz">
+  <div class="wrap">
+    <div id="rd-entrada" hidden></div>
+    <div id="rd-app" hidden>
+      <div class="rd-barra">
+        <h1 id="rd-titulo">Hoy en Big Burger<small id="rd-fecha"></small></h1>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span class="rd-vivo" id="rd-vivo" role="status"><i></i><span id="rd-vivo-txt">Conectando…</span></span><button type="button" class="rest-btn sec chico" id="rd-salir">Salir</button></div>
+      </div>
+      <div id="rd-cuerpo">
+        <section class="rd-fila1" aria-label="Resumen de hoy">
+          <article class="rest-tarjeta rd-heroe"><span class="rotulo">Hamburguesas vendidas hoy</span><span class="cifra" id="rd-hero">—</span><span class="rd-delta" id="rd-delta" hidden></span>
+            <div class="rd-meta"><div class="pista"><i id="rd-rec-barra" style="transform:scaleX(0)"></i></div><p id="rd-rec-txt"></p></div></article>
+          <div class="rd-kpis" id="rd-kpis"></div>
+        </section>
+
+        <section class="rd-fila2">
+          <article class="rest-tarjeta"><header><div><h2>Hamburguesas por hora</h2><small>Hoy frente al mismo día de la semana pasada</small></div><button type="button" class="rd-vistatabla" data-tabla="horas" aria-pressed="false">Ver tabla</button></header>
+            <div class="rd-leyenda" style="margin-bottom:6px"><span><i style="background:var(--fx-accent)"></i>Hoy</span><span><i class="linea" style="background:var(--d-mut)"></i>Semana pasada</span></div>
+            <div id="rd-horas" class="rd-horas"></div><div id="rd-horas-tabla" class="rd-tabla-vista" hidden></div></article>
+          <article class="rest-tarjeta"><header><div><h2>Cómo te piden</h2><small>Hamburguesas de hoy por canal</small></div></header>
+            <div class="rd-canal" id="rd-canal" role="img" aria-label="Reparto por canal"></div><div class="rd-canal-lista" id="rd-canal-lista"></div></article>
+        </section>
+
+        <section class="rd-fila3">
+          <article class="rest-tarjeta"><header><div><h2>Qué se vende y qué queda</h2><small id="rd-stock-sub">Stock del día cargado por el dueño; baja solo con cada venta.</small></div><button type="button" class="rest-btn chico" id="rd-stock-abrir">Cargar stock de hoy</button></header>
+            <form id="rd-editor" class="rd-editor" hidden></form>
+            <div style="overflow-x:auto"><table class="rd-prod"><thead><tr><th>Producto</th><th>Vendidas hoy</th><th>Stock</th></tr></thead><tbody id="rd-prod"></tbody></table></div></article>
+          <article class="rest-tarjeta"><header><div><h2>Movimientos en vivo</h2><small>Ventas del local y pedidos confirmados</small></div></header><ul class="rd-feed" id="rd-feed" aria-live="polite"></ul></article>
+        </section>
+
+        <section class="rd-fila4">
+          <article class="rest-tarjeta"><header><div><h2>Últimos 7 días</h2><small>Hamburguesas por día</small></div><button type="button" class="rd-vistatabla" data-tabla="semana" aria-pressed="false">Ver tabla</button></header><div class="rd-semana" id="rd-semana"></div><div id="rd-semana-tabla" class="rd-tabla-vista" hidden></div></article>
+          <article class="rest-tarjeta"><header><div><h2>Equipo hoy</h2><small>Ventas registradas en el local</small></div></header><div class="rd-equipo" id="rd-equipo"></div></article>
+          <article class="rest-tarjeta"><header><div><h2>Pedidos de la web</h2><small>Esperan confirmación del local</small></div></header><div id="rd-web"></div></article>
+        </section>
+
+        
+
+        <div class="rd-demo" id="rd-demo" hidden>
+          <span class="rest-chip-demo">Solo en la demo</span><span>Mira el dashboard moverse sin otro celular:</span>
+          <button type="button" class="rest-btn chico" id="rd-sim">Simular una venta del local</button>
+          <button type="button" class="rest-btn sec chico" id="rd-auto" aria-pressed="false">Simular ventas cada 6 s</button>
+          <button type="button" class="rest-btn sec chico" id="rd-reset">Reiniciar datos de ejemplo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<script src="config.js"></script>
+<script src="menu.js"></script>
+<script src="modulos/restaurante/restaurante-datos.js"></script>
+<script src="modulos/restaurante/rest-ui.js"></script>
+
+<script src="modulos/restaurante/rest-api.js"></script>
+<script src="modulos/restaurante/rest-dashboard.js"></script>
+
+</body>
+</html>

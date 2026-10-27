@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#121212">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&amp;family=Barlow:wght@400;600;700;800&amp;display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&amp;family=Barlow:wght@400;600;700;800&amp;display=swap"></noscript>
+<link rel="stylesheet" href="estilos/base.css">
+<link rel="stylesheet" href="efectos/base.css">
+<link rel="stylesheet" href="efectos/energia.css">
+<link rel="stylesheet" href="efectos/escaparate.css">
+<style>:root { --fx-bg: #F2F0EA; --fx-paper: #FAF8F3; --fx-accent: #E1AC25; --fx-ink: #121212; --fx-deep: #1A1A1A; --fx-pop: #E1AC25; --fx-font: "Barlow", "Arial Narrow", Arial, sans-serif; --fx-font-disp: "Oswald", Impact, "Arial Narrow", sans-serif; --fx-font-txt: "Barlow", "Arial Narrow", Arial, sans-serif; --fx-deep-2: #121212; --fx-line-deep: #2E2E2E; --fx-soft: #D9D6CF; --fx-soft-2: #A9A59D; --fx-warm: #E60202; --fx-chat: #ECE7DD; }</style>
+
+<title>Pantalla de ventas · Big Burger (Premium)</title>
+<meta name="description" content="Caja de Big Burger: aceptar o rechazar los pedidos de la web y de la pantalla del local, registrar ventas del mostrador y anular errores.">
+<link rel="stylesheet" href="modulos/restaurante/rest.css">
+<link rel="stylesheet" href="modulos/restaurante/rest-panel.css">
+</head>
+<body class="rest-oscuro" data-pagina="Pantalla de ventas (personal)" data-secciones='["Vender", "Pedidos web", "Mis ventas"]'>
+<header class="cabecera"><div class="wrap">
+  <a class="marca" href="index.html"><img src="assets/logo.webp" alt="" width="52" height="52"><span><b>Big Burger</b><small>Pantalla de ventas</small></span></a>
+  <nav aria-label="Pantallas del local"><a href="dashboard.html">Dashboard del dueño</a><a href="index.html">La página</a></nav>
+</div></header>
+<main class="rest-panel">
+  <div class="wrap">
+    <div id="rp-entrada" hidden></div>
+    <div id="rp-app" hidden>
+      <div class="rp-barra">
+        <h1 id="rp-quien">Ventas del local</h1>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <div class="rp-tabs" role="tablist" aria-label="Qué quieres hacer">
+            <button type="button" role="tab" id="t-vender" aria-selected="true" aria-controls="p-vender">Vender</button>
+            <button type="button" role="tab" id="t-pedidos" aria-selected="false" aria-controls="p-pedidos">Pedidos <span class="n" id="rp-n" hidden>0</span></button>
+            <button type="button" role="tab" id="t-ventas" aria-selected="false" aria-controls="p-ventas">Mis ventas</button>
+            
+          </div>
+          <button type="button" class="rest-btn sec chico" id="rp-sonido" aria-pressed="true">Sonido: sí</button><button type="button" class="rest-btn sec chico" id="rp-salir">Salir</button>
+        </div>
+      </div>
+
+      <section id="p-vender" role="tabpanel" aria-labelledby="t-vender" class="rp-vender">
+        <div id="rp-botones"></div>
+        <aside class="rest-tarjeta rp-ticket" aria-label="Venta en curso">
+          <ul id="rp-lineas"></ul><p class="rp-vacio" id="rp-vacio">Toca una burger para empezar la venta.</p>
+          <div class="rp-total"><span>Total</span><b id="rp-total">$0.00</b></div>
+          <div style="display:flex;gap:10px"><button type="button" class="rest-btn" id="rp-registrar" style="flex:1" disabled>Registrar venta</button><button type="button" class="rest-btn sec" id="rp-limpiar" aria-label="Vaciar la venta">Vaciar</button></div>
+        </aside>
+      </section>
+
+      <section id="p-pedidos" role="tabpanel" aria-labelledby="t-pedidos" hidden><div class="rp-lista" id="rp-pedidos"></div></section>
+      <section id="p-ventas" role="tabpanel" aria-labelledby="t-ventas" hidden><div class="rp-lista" id="rp-ventas"></div></section>
+      
+    </div>
+  </div>
+</main>
+<dialog class="rest-dialogo" id="rp-dialogo"><form method="dialog"><h2>Anular venta</h2><label class="rest-campo">Motivo<input id="rp-motivo" maxlength="200" placeholder="Ej.: me equivoqué de burger" required></label>
+  <div class="acc"><button value="no" class="rest-btn sec" formnovalidate>Volver</button><button value="si" class="rest-btn peligro" id="rp-anular-ok">Anular</button></div></form></dialog>
+<script src="config.js"></script>
+<script src="menu.js"></script>
+<script src="modulos/restaurante/restaurante-datos.js"></script>
+<script src="modulos/restaurante/rest-ui.js"></script>
+
+<script src="modulos/restaurante/rest-api.js"></script>
+<script src="modulos/restaurante/rest-personal.js"></script>
+
+</body>
+</html>

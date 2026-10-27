@@ -1,0 +1,73 @@
+/* efectos/escaparate.css · complemento OPCIONAL de la vitrina de restaurantes (efectos.usar = ["escaparate"] + restaurante.escaparate = {palabra, sub}).
+   Variante de la cabecera de la vitrina tipo "escaparate": UNA palabra gigante fija (la marca) con textura gastada, la burger delante,
+   flechas redondas a los lados, línea de subtítulo con reglas doradas y fondo facetado oscuro. Origen: Big Burger (oct 2026), a partir de su
+   encabezado de carta y de la captura de referencia de Daniel. Sin filas repetidas ni contorno (eso es la vitrina de Gorila).
+   Estático salvo el cambio de burger (que ya hace rest.css); nada depende de :hover. rest.css se carga después: los selectores llevan .esc-hero. */
+:root {
+  --esc-gastado: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.42' numOctaves='3' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -20 14.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- fondo facetado (como el encabezado de su carta) ---------- */
+.rb-hero.esc-hero { min-height: min(100svh, 940px); padding-bottom: 0; background: var(--fx-deep-2); }
+.esc-fondo { position: absolute; inset: 0; z-index: -3; pointer-events: none;
+  background:
+    linear-gradient(118deg, transparent 0 34%, rgba(255, 255, 255, .045) 34% 49%, transparent 49%),
+    linear-gradient(64deg, transparent 0 60%, rgba(255, 255, 255, .035) 60% 74%, transparent 74%),
+    linear-gradient(152deg, rgba(255, 255, 255, .05) 0 16%, transparent 16% 100%),
+    linear-gradient(28deg, transparent 0 82%, rgba(255, 255, 255, .04) 82%),
+    linear-gradient(200deg, transparent 0 70%, rgba(0, 0, 0, .35) 70%),
+    radial-gradient(120% 60% at 50% 100%, color-mix(in srgb, var(--fx-accent) 16%, transparent), transparent 70%); }
+.esc-hero .rb-glow.on { opacity: .35; }
+
+/* ---------- cabecera: menú centrado ---------- */
+.esc-hero .rb-cab .wrap { display: grid; grid-template-columns: 1fr auto 1fr; }
+.esc-hero .rb-cab-der { justify-content: flex-end; }
+.esc-nav { display: flex; gap: clamp(18px, 2.4vw, 36px); }
+.esc-nav a { position: relative; color: var(--fx-bg); text-decoration: none; font: 700 1rem/1 var(--fx-font-txt); letter-spacing: .04em; padding-block: 10px; }
+.esc-nav a:first-child::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--fx-accent); }
+@media (max-width: 1080px) { .esc-nav { display: none; } .esc-hero .rb-cab .wrap { display: flex; } }
+
+/* ---------- la palabra de la marca, una sola vez, gastada ---------- */
+.esc-palabra { position: absolute; z-index: -1; left: 0; right: 0; top: clamp(96px, 11vw, 150px); margin: 0; text-align: center; white-space: nowrap;
+  font: 700 clamp(4.2rem, 18vw, 18rem)/.86 var(--fx-font-disp); text-transform: uppercase; letter-spacing: -.005em; color: var(--fx-bg);
+  -webkit-mask-image: var(--esc-gastado); mask-image: var(--esc-gastado); -webkit-mask-size: 260px; mask-size: 260px; }
+
+/* ---------- burger al centro con flechas doradas redondas ---------- */
+.esc-centro { position: relative; z-index: 2; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 8px;
+  padding-inline: clamp(12px, 3vw, 48px); margin-top: clamp(150px, 15vw, 230px); }
+.esc-hero .rb-escena { margin: 0; height: clamp(260px, 36vw, 520px); }
+.esc-hero .rb-slide img { filter: drop-shadow(0 30px 34px rgba(0, 0, 0, .7)); }
+.esc-flecha { width: clamp(46px, 4.4vw, 60px); height: clamp(46px, 4.4vw, 60px); border-radius: 50%; border: 0; cursor: pointer; display: grid; place-items: center;
+  background: var(--fx-accent); color: var(--fx-deep); transition: transform .2s var(--fx-ease, ease); }
+.esc-flecha:active { transform: scale(.92); }
+.esc-flecha svg { width: 55%; height: 55%; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- subtítulo con reglas doradas (— HAMBURGUESAS PREMIUM —) ---------- */
+.esc-sub { position: relative; z-index: 2; margin: clamp(6px, 1vw, 14px) auto 0; display: flex; align-items: center; justify-content: center; gap: clamp(12px, 2vw, 22px);
+  font: 700 clamp(.95rem, 1.6vw, 1.35rem)/1 var(--fx-font-txt); letter-spacing: .18em; text-transform: uppercase; color: var(--fx-accent); }
+.esc-sub::before, .esc-sub::after { content: ""; width: clamp(34px, 7vw, 110px); height: 2px; background: var(--fx-accent); }
+
+/* ---------- pie: nombre de la burger con subrayado dorado y número ---------- */
+.esc-pie { position: relative; z-index: 3; display: flex; align-items: flex-end; justify-content: space-between; gap: 18px;
+  padding: clamp(18px, 3vw, 34px) clamp(18px, 4vw, 64px) clamp(26px, 4vw, 48px); }
+.esc-hero .rb-intro { color: var(--fx-soft-2); }
+.esc-hero .rb-nombre { color: var(--fx-accent); font-size: clamp(2.2rem, 5.2vw, 4.4rem); padding-bottom: 10px; position: relative; }
+.esc-hero .rb-nombre::after { content: ""; position: absolute; left: 0; bottom: 0; width: 72px; height: 3px; background: var(--fx-accent); }
+.esc-hero .rb-precio { border-right-color: var(--fx-line-deep); }
+.esc-n { margin: 0; font: 300 clamp(2.6rem, 5vw, 4.4rem)/1 var(--fx-font-disp); color: var(--fx-bg); display: flex; align-items: center; gap: 14px; }
+.esc-n::before { content: ""; width: 48px; height: 2px; background: var(--fx-accent); }
+
+@media (max-width: 760px) {
+  .rb-hero.esc-hero { min-height: 0; }
+  .esc-palabra { top: 132px; font-size: 19vw; }
+  .esc-centro { margin-top: 130px; gap: 0; padding-inline: 6px; }
+  .esc-hero .rb-escena { height: 250px; }
+  .esc-flecha { width: 44px; height: 44px; }
+  .esc-n { font-size: 2.4rem; } .esc-n::before { width: 28px; }
+}
+
+/* ---------- títulos del resto de la página: fino dorado con regla, como el encabezado de la carta ---------- */
+.rb-pagina h2.doble > span:first-child::before, .rb-detalle h2 span::before { content: ""; display: inline-block; width: 1.4em; height: 2px; margin-right: .45em; vertical-align: middle; background: var(--fx-accent); }
+.rb-pagina h2.doble { -webkit-mask-image: var(--esc-gastado); mask-image: var(--esc-gastado); -webkit-mask-size: 260px; mask-size: 260px; }
+
+@media (prefers-reduced-motion: reduce) { .esc-flecha { transition: none; } }

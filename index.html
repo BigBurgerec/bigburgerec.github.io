@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#121212">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&amp;family=Barlow:wght@400;600;700;800&amp;display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&amp;family=Barlow:wght@400;600;700;800&amp;display=swap"></noscript>
+<link rel="stylesheet" href="estilos/base.css">
+<link rel="stylesheet" href="efectos/base.css">
+<link rel="stylesheet" href="efectos/energia.css">
+<link rel="stylesheet" href="efectos/escaparate.css">
+<link rel="stylesheet" href="motor/pedido.css">
+<style>:root { --fx-bg: #F2F0EA; --fx-paper: #FAF8F3; --fx-accent: #E1AC25; --fx-ink: #121212; --fx-deep: #1A1A1A; --fx-pop: #E1AC25; --fx-font: "Barlow", "Arial Narrow", Arial, sans-serif; --fx-font-disp: "Oswald", Impact, "Arial Narrow", sans-serif; --fx-font-txt: "Barlow", "Arial Narrow", Arial, sans-serif; --fx-deep-2: #121212; --fx-line-deep: #2E2E2E; --fx-soft: #D9D6CF; --fx-soft-2: #A9A59D; --fx-warm: #E60202; --fx-chat: #ECE7DD; }</style>
+
+<link rel="stylesheet" href="modulos/restaurante/rest.css">
+<link rel="preload" as="image" href="assets/corte-big-mapple.webp" fetchpriority="high">
+<title>Big Burger Ambato · Hamburguesas premium</title>
+<meta name="description" content="Big Burger en Ambato: hamburguesas premium con carne de 140 g, pan de papa artesanal y salsa de la casa. Mira la carta y haz tu pedido por WhatsApp.">
+<meta property="og:title" content="Big Burger · Hamburguesas premium en Ambato">
+<meta property="og:description" content="Clásicas, Premium e Insignia. Arma tu pedido y llega completo a WhatsApp.">
+<meta property="og:image" content="assets/og.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Restaurant", "name": "Big Burger Ambato", "servesCuisine": "Hamburguesas", "telephone": "+[MARCADOR: wa]", "address": {"@type": "PostalAddress", "streetAddress": "[MARCADOR: direccion]", "addressLocality": "Ambato", "addressRegion": "Tungurahua", "addressCountry": "EC"}}
+</script>
+<style>
+/* Hero */
+.hero { position: relative; overflow: hidden; }
+.hero .wrap { display: grid; gap: 28px; align-items: center; padding-block: clamp(28px, 5vw, 64px) clamp(44px, 6vw, 80px); grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); }
+.hero h1 { text-transform: uppercase; line-height: .84; }
+.hero h1 .fino { display: block; font: 300 clamp(2.4rem, 6.4vw, 4.6rem)/.9 var(--fx-font-disp); }
+.hero h1 .grueso { display: block; font: 900 clamp(4.2rem, 13vw, 9.6rem)/.84 var(--fx-font-disp); letter-spacing: .005em; }
+.hero .lead { margin-top: 20px; max-width: 40ch; font-size: 1.2rem; color: var(--fx-soft); }
+.hero-media { position: relative; justify-self: end; width: min(100%, 540px); }
+.hero-foto { aspect-ratio: 572 / 553; border-radius: 22px; overflow: hidden; box-shadow: 10px 10px 0 var(--fx-accent); }
+.hero-foto img { width: 100%; height: 100%; object-fit: cover; }
+.hero .sello { position: absolute; left: -34px; bottom: -26px; z-index: 2; }
+@media (max-width: 860px) {
+  .hero .wrap { grid-template-columns: 1fr; }
+  .hero-media { order: -1; justify-self: stretch; width: 100%; }
+  .hero-foto { aspect-ratio: 4 / 3.6; }
+  .hero .sello { left: auto; right: 10px; bottom: -22px; width: 108px; height: 108px; font-size: .98rem; }
+}
+
+/* Diagnóstico */
+.diag .wrap { display: grid; gap: clamp(28px, 5vw, 64px); grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: center; }
+@media (max-width: 860px) { .diag .wrap { grid-template-columns: 1fr; } }
+.caja { background: var(--fx-paper); border: 3px solid var(--fx-deep); border-radius: 20px; box-shadow: 8px 8px 0 var(--fx-deep); padding: clamp(20px, 3vw, 30px); min-height: 440px; display: flex; flex-direction: column; gap: 16px; }
+.caja-cab { display: flex; align-items: center; gap: 12px; padding-bottom: 12px; border-bottom: 2px dashed color-mix(in srgb, var(--fx-deep) 30%, transparent); }
+.caja-cab img { width: 42px; height: 42px; border-radius: 50%; }
+.caja-cab b { display: block; font: 900 1.3rem/1 var(--fx-font-disp); text-transform: uppercase; }
+.caja-cab small { font-size: .95rem; }
+.prog { display: flex; align-items: center; gap: 12px; font: 700 .95rem var(--fx-font-txt); }
+.prog .pista { flex: 1; height: 8px; border-radius: 99px; background: color-mix(in srgb, var(--fx-deep) 15%, transparent); overflow: hidden; }
+.prog .pista div { height: 100%; background: var(--fx-accent); border-radius: 99px; transition: width .35s var(--fx-ease); }
+.caja h3 { font: 900 clamp(1.8rem, 4vw, 2.4rem)/.95 var(--fx-font-disp); text-transform: uppercase; }
+.ops { display: grid; gap: 10px; }
+.op { display: flex; align-items: center; gap: 12px; min-height: 58px; padding: 10px 16px; text-align: left; background: #fff; border: 2px solid var(--fx-deep); border-radius: 12px; font: 700 1.12rem/1.2 var(--fx-font-txt); color: var(--fx-ink); cursor: pointer; transition: transform .2s var(--fx-ease), box-shadow .2s; box-shadow: 3px 3px 0 var(--fx-deep); }
+.op:active { transform: translate(3px, 3px); box-shadow: none; }
+.op small { display: block; font-weight: 400; font-size: .95rem; }
+.enlace { align-self: flex-start; min-height: 44px; border: 0; background: none; font: 700 1.05rem var(--fx-font-txt); color: var(--fx-ink); cursor: pointer; padding: 0; text-decoration: underline; text-underline-offset: 3px; }
+.reco { background: var(--fx-deep); color: var(--fx-bg); border-radius: 14px; padding: 18px; }
+.reco small { color: var(--fx-pop); font: 700 .95rem var(--fx-font-txt); }
+.reco b { display: block; font: 900 clamp(2.1rem, 5vw, 2.8rem)/.9 var(--fx-font-disp); text-transform: uppercase; margin: 6px 0; }
+.reco p { color: var(--fx-soft); }
+.reco .precio { font: 900 1.8rem/1 var(--fx-font-disp); color: var(--fx-pop); margin-top: 10px; }
+
+/* Cómo pides */
+.pasos { display: grid; gap: 30px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); margin-top: 44px; }
+.paso { display: flex; gap: 16px; align-items: flex-start; }
+.paso .ico { color: var(--fx-pop); }
+.paso b { font: 300 1.1rem var(--fx-font-disp); color: var(--fx-pop); }
+.paso h3 { font: 800 1.6rem/1 var(--fx-font-disp); text-transform: uppercase; margin: 2px 0 6px; }
+.paso p { color: var(--fx-soft); }
+.eventos-cta { margin-top: 38px; }
+
+/* Galería */
+.galeria { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); margin-top: 40px; }
+.galeria figure { margin: 0; border-radius: 18px; border: 3px solid var(--fx-bg); aspect-ratio: 1 / 1; }
+.galeria img { width: 100%; height: 100%; object-fit: cover; }
+.galeria figure:nth-child(2) { transform: rotate(1.5deg); } .galeria figure:nth-child(3) { transform: rotate(-1.5deg); }
+
+/* Qué cambia */
+.cambia { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); margin-top: 40px; }
+.chat { border-radius: 20px; padding: 18px; background: var(--fx-chat); border: 3px solid var(--fx-deep); }
+.chat h3 { font: 800 1.4rem/1 var(--fx-font-disp); text-transform: uppercase; margin-bottom: 12px; display: flex; gap: 10px; align-items: center; }
+.burbuja { max-width: 88%; padding: 9px 12px; border-radius: 12px; margin: 8px 0; font: 400 1.02rem/1.35 var(--fx-font-txt); background: #fff; white-space: pre-line; }
+.burbuja.yo { margin-left: auto; background: #d9fdd3; }
+.chat.despues { background: var(--fx-deep); }
+.chat.despues h3 { color: var(--fx-bg); }
+
+/* Dónde */
+.donde { display: grid; gap: 30px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
+@media (max-width: 860px) { .donde { grid-template-columns: 1fr; } }
+.dato { display: flex; gap: 14px; align-items: center; margin-top: 16px; font-size: 1.15rem; }
+.dato .ico { width: 50px; height: 50px; }
+
+/* Cierre */
+.cierre { overflow: hidden; text-align: center; }
+.cierre .contorno { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); white-space: nowrap; }
+.cierre .wrap { position: relative; }
+.cierre .acciones { justify-content: center; }
+.demo-links { display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: center; margin-top: 22px; font-size: 1.02rem; }
+</style>
+</head>
+<body class="rb-pagina" data-pagina="Landing (Pro)" data-secciones='["Vitrina de burgers (inicio)", "¿Qué Big Burger eres hoy?", "Cómo pides", "Carta", "Galería", "Qué cambia", "Dónde estamos", "Cierre"]'>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-reloj" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11.5a7 7 0 0 0-14 0C5 15 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></symbol>
+  <symbol id="i-burger" viewBox="0 0 24 24"><path d="M4 10a8 5 0 0 1 16 0z"/><path d="M3.5 13.5h17M4 17h16a0 0 0 0 1 0 0 3 3 0 0 1-3 3H7a3 3 0 0 1-3-3z"/><path d="M9 7h.01M13 6.5h.01M15.5 8h.01"/></symbol>
+  <symbol id="i-bolsa" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></symbol>
+  <symbol id="i-moto" viewBox="0 0 24 24"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M9 17h5l2-6h-4M16 11l2 6M12 11 10 7H7"/></symbol>
+  <symbol id="i-envio" viewBox="0 0 24 24"><path d="M21 4 3 11l7 3 3 7z"/><path d="m10 14 4-4"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-web" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5"/><path d="M3.5 9h17M7 6.8h.01M9.5 6.8h.01"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+  <symbol id="i-pago" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="1.5"/><path d="M3 10h18M7 14h3"/></symbol>
+  <symbol id="i-llave" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="1.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-foto" viewBox="0 0 24 24"><path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+  <symbol id="i-lista" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01"/></symbol>
+  <symbol id="i-copa" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 20h7"/></symbol>
+  <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="6" height="6" rx="1"/><rect x="14.5" y="3.5" width="6" height="6" rx="1"/><rect x="3.5" y="14.5" width="6" height="6" rx="1"/><path d="M14.5 14.5h2v2h-2zM18.5 14.5h2M14.5 18.5h2M18.5 18.5v2"/></symbol>
+  <symbol id="i-estrella" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.8 6.8 19.6l1-5.8-4.3-4.1 5.9-.9z"/></symbol>
+  <symbol id="i-tarjeta" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3 10h18M7 15h4"/></symbol>
+  <symbol id="i-caja" viewBox="0 0 24 24"><path d="M6 3.5h12v5H6zM4 8.5h16l-1.5 11h-13z"/><path d="M9 13h6"/></symbol>
+  <symbol id="i-equipo" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3"/><circle cx="17" cy="9.5" r="2.3"/><path d="M3.5 19c.5-3.5 2.7-5.5 5.5-5.5s5 2 5.5 5.5M15 14.2c2.6-.4 4.7 1 5.5 4.3"/></symbol>
+  <symbol id="i-juego" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8.5 20h7"/></symbol>
+  <symbol id="i-agenda" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h2M13 14h3M8 17h2"/></symbol>
+  <symbol id="i-panel" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></symbol>
+</defs></svg>
+
+
+
+
+<main>
+<dialog class="rb-menu" id="rb-menu" aria-label="Menú">
+  <div class="rb-menu-cab"><span></span><form method="dialog"><button class="rb-menu-x" aria-label="Cerrar el menú"><svg viewBox="0 0 40 40"><path d="M6 6l28 28M34 6L6 34"/></svg></button></form></div>
+  <nav><a href="#inicio">Inicio</a>
+  <a href="#rb-detalle">Las burgers</a>
+  <a href="#carta">Carta</a>
+  <a href="#diagnostico">¿Qué Big Burger eres?</a>
+  <a href="#como">Cómo pides</a>
+  <a href="#donde">Dónde estamos</a>
+  </nav>
+  <footer>
+    <p><span class="pend">[MARCADOR: zona]</span></p>
+    <a class="rb-sello" href="#carta" aria-label="Ver menú">
+      <svg class="giro" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="rb-circ" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text><textPath href="#rb-circ">Ver menú · Ver menú · Ver menú ·</textPath></text></svg>
+      <svg class="flecha" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18L18 6M8 6h10v10"/></svg>
+    </a>
+  </footer>
+</dialog>
+
+<section class="rb-hero esc-hero" id="inicio" aria-roledescription="carrusel" aria-label="Las burgers de Big Burger">
+  <header class="rb-cab"><div class="wrap">
+  <div class="rb-cab-izq">
+    <a class="rb-logo" href="#inicio" aria-label="Big Burger, inicio"><img src="assets/logo.webp" alt="" width="52" height="52"></a>
+    <button type="button" class="rb-menu-btn" id="rb-abrir" aria-label="Abrir el menú" aria-haspopup="dialog"><i></i><i></i><i></i></button>
+  </div>
+  <nav class="esc-nav" aria-label="Secciones"><a href="#diagnostico">¿Qué Big Burger eres?</a><a href="#carta">Carta</a><a href="#como">Cómo pides</a><a href="#donde">Dónde</a></nav>
+  <div class="rb-cab-der"><a class="rb-pill lleno" href="#carta" data-pedir>Ver menú</a></div>
+</div></header>
+  <div id="rb-centinela" aria-hidden="true" style="position:absolute;top:140px;left:0;width:1px;height:1px;pointer-events:none"></div>
+  <div class="esc-fondo" aria-hidden="true"></div>
+  <div id="rb-glows" aria-hidden="true"></div>
+  <div class="rb-filas" id="rb-filas" data-fijo hidden></div>
+  <p class="esc-palabra" aria-hidden="true">Big Burger</p>
+  <div class="esc-centro">
+    <button type="button" class="esc-flecha" id="rb-ant" aria-label="Burger anterior"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <div class="rb-escena" id="rb-escena"><div class="rb-slide on" data-n="0" role="group" aria-roledescription="diapositiva" aria-label="1"><img src="assets/corte-big-mapple.webp" alt="Hamburguesa Big Mapple Burger con tocino, queso, queso labneh y miel maple en pan de papa artesanal" width="591" height="461" fetchpriority="high" decoding="async"></div></div>
+    <button type="button" class="esc-flecha" id="rb-sig" aria-label="Burger siguiente"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
+  <p class="esc-sub"><span>Hamburguesas premium</span></p>
+  <div class="esc-pie">
+    <div class="rb-texto" aria-live="polite">
+      <p class="rb-intro" id="rb-intro"></p>
+      <h1 class="rb-nombre" id="rb-nombre"></h1>
+      <a class="rb-desc" id="rb-desc" href="#rb-detalle"><span class="rb-precio" id="rb-precio"></span>¡Descúbrela! <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18L18 6M8 6h10v10"/></svg></a>
+    </div>
+    <p class="esc-n" aria-hidden="true"><span id="rb-n">1</span></p>
+  </div>
+</section>
+
+<section class="rb-detalle" id="rb-detalle"><div class="wrap">
+  <div><h2 id="rb-det-tit"></h2><div class="rb-fichas" id="rb-fichas"></div><div id="rb-quedan"></div></div>
+  <div><p class="rb-intro" id="rb-det-txt" style="max-width:46ch"></p><div class="acciones"><a class="rb-boton lleno" id="rb-pedir" href="#carta">Pedir esta burger</a><a class="rb-boton" href="#carta">Ver la carta</a></div></div>
+</div></section>
+
+<section class="rb-cats" aria-label="Categorías de la carta"><div class="wrap"><h2 class="doble" style="color:var(--fx-bg)"><span style="color:var(--fx-pop)">Toda la carta,</span>por categoría</h2></div>
+  <div class="fila" id="rb-cats" style="margin-top:22px"></div></section>
+
+
+
+<section class="sec papel diag" id="diagnostico"><div class="wrap">
+  <div data-reveal>
+    <h2 class="doble"><span>Tres preguntas</span>¿Qué Big Burger eres hoy?</h2>
+    <p class="intro">Dinos cuánta hambre traes y qué sabor te llama: te recomendamos una burger de la carta y la sumas a tu pedido con un toque.</p>
+  </div>
+  <div class="caja" id="caja-diag" aria-live="polite"></div>
+</div></section>
+
+<section class="sec oscuro" id="como"><div class="wrap">
+  <h2 class="doble" data-reveal><span>Así pides</span>sin pausas</h2>
+  <div class="pasos" data-stagger>
+    <div class="paso"><span class="ico"><svg><use href="#i-burger"/></svg></span><div><b>1</b><h3>Elige tu burger</h3><p>Desde la carta o con «¿Qué Big Burger eres hoy?». Tres líneas: Clásicas, Premium e Insignia.</p></div></div>
+    <div class="paso"><span class="ico"><svg><use href="#i-bolsa"/></svg></span><div><b>2</b><h3>Llevar o domicilio</h3><p>Retiras en el local o te lo llevamos. Si es a domicilio, compartes tu ubicación con un toque.</p></div></div>
+    <div class="paso"><span class="ico"><svg><use href="#i-envio"/></svg></span><div><b>3</b><h3>Envías y listo</h3><p>Tu pedido llega a WhatsApp con todo: burgers, extras, total y dirección.</p></div></div>
+    
+  </div>
+</div></section>
+
+
+
+<section class="sec" id="carta"><div class="wrap">
+  <h2 class="doble" data-reveal><span>Nuestra</span>carta</h2>
+  <p class="intro" data-reveal>Clásicas en pan tradicional; Premium e Insignia en pan de papa artesanal. Todas con carne de 140 g y salsa de la casa.</p>
+  <div id="carta-lista" style="margin-top:36px"></div>
+</div></section>
+
+<section class="sec oscuro" id="galeria"><div class="wrap">
+  <h2 class="doble" data-reveal><span>Hechas</span>al momento</h2>
+  <div class="galeria" data-stagger>
+    <figure class="fx-zoom"><img src="assets/foto-burger-1.webp" alt="Hamburguesa con tocino crujiente, queso cheddar, tomate y lechuga" width="560" height="560" loading="lazy"></figure>
+    <figure class="fx-zoom"><img src="assets/foto-burger-2.webp" alt="Hamburguesa con tocino, queso cheddar fundido, cebolla morada y lechuga" width="560" height="560" loading="lazy"></figure>
+    <figure class="fx-zoom"><img src="assets/foto-portobello.webp" alt="Hamburguesa Portobello con champiñones, queso labneh y lechuga" width="460" height="460" loading="lazy"></figure>
+    
+  </div>
+</div></section>
+
+<section class="sec papel" id="cambia"><div class="wrap">
+  <h2 class="doble" data-reveal><span>Tu pedido llega</span>completo a la primera</h2>
+  <p class="intro" data-reveal>Sin ir y venir de mensajes: el pedido llega armado, con total y tipo de entrega.</p>
+  <div class="cambia" data-stagger>
+    <div class="chat"><h3><span class="ico" style="width:40px;height:40px"><svg style="width:20px;height:20px"><use href="#i-chat"/></svg></span>Antes</h3>
+      <div class="burbuja yo">Hola, info</div><div class="burbuja yo">¿Precio de la Tocino Lovers?</div><div class="burbuja">Hola, $7.00 😊</div><div class="burbuja yo">¿Hacen domicilio?</div><div class="burbuja yo">¿Y qué lleva la Big Mapple?</div>
+    </div>
+    <div class="chat despues"><h3><span class="ico" style="width:40px;height:40px"><svg style="width:20px;height:20px"><use href="#i-envio"/></svg></span>Ahora</h3>
+      <div class="burbuja yo">Hola Big Burger, quiero hacer un pedido desde la web 🍔
+
+1 × Tocino Lovers — $7.00
+1 × La cheddar — $3.00
+
+Total: $10.00
+Tipo: Para llevar
+Retiro: En 30 minutos</div>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec arena" id="donde"><div class="wrap donde">
+  <div data-reveal>
+    <h2 class="doble"><span>Ven a</span>Big Burger</h2>
+    <div class="dato"><span class="ico"><svg><use href="#i-pin"/></svg></span><span><span class="pend">[MARCADOR: direccion]</span>, Ambato</span></div>
+    <div class="dato"><span class="ico"><svg><use href="#i-reloj"/></svg></span><span> <span class="pend">[MARCADOR: horario]</span></span></div>
+    <div class="acciones">
+      <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=[MARCADOR: maps_query]" target="_blank" rel="noopener">Cómo llegar</a>
+      
+    </div>
+  </div>
+  <div class="oscuro" style="border-radius:20px;padding:clamp(22px,3vw,32px);box-shadow:8px 8px 0 var(--fx-deep);border:3px solid var(--fx-deep)" data-reveal>
+    <h3 style="font:900 2rem/.95 var(--fx-font-disp);text-transform:uppercase">Pedidos por WhatsApp</h3>
+    <p style="font:900 clamp(2.4rem,7vw,3.4rem)/1 var(--fx-font-disp);color:var(--fx-pop);margin:10px 0 6px"><span class="pend">[MARCADOR: telefono]</span></p>
+    <div class="dato"><span class="ico" style="color:var(--fx-pop)"><svg><use href="#i-bolsa"/></svg></span><span>Para llevar: pides por WhatsApp y retiras en el local.</span></div>
+    <div class="dato"><span class="ico" style="color:var(--fx-pop)"><svg><use href="#i-moto"/></svg></span><span>A domicilio <span class="pend">[CONFIRMAR: si hace domicilio y a qué sectores]</span></span></div>
+    <div class="acciones"><a class="btn" data-wa="Hola Big Burger, quiero hacer un pedido.">Escribir a Big Burger</a></div>
+  </div>
+</div></section>
+
+<section class="sec oscuro cierre"><div class="contorno" aria-hidden="true">BIG BURGER</div><div class="wrap">
+  <h2 class="doble" data-reveal><span>¿Listo para tu</span>Big Burger?</h2>
+  <div class="acciones"><a class="btn" href="#carta">Armar mi pedido</a><a class="btn btn-linea" data-wa="Hola Big Burger, quiero hacer una consulta.">Escribir por WhatsApp</a></div>
+  
+</div></section>
+
+</main>
+
+<footer><div class="wrap">
+  <img src="assets/logo.webp" alt="Big Burger" width="64" height="64" loading="lazy">
+  <div>Big Burger Ambato · <span class="pend">[MARCADOR: direccion_corta]</span> · <span class="pend">[MARCADOR: telefono]</span><br>
+  </div>
+</div></footer>
+
+<a class="wa-flot" data-wa="Hola Big Burger, quiero hacer un pedido." aria-label="Escribir a Big Burger por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></a>
+
+
+<script src="config.js"></script>
+<script src="menu.js"></script>
+<script src="modulos/restaurante/restaurante-datos.js"></script>
+<script src="modulos/restaurante/rest-ui.js"></script>
+
+<script src="modulos/restaurante/rest-api.js"></script>
+<script src="motor/pedido.js"></script>
+<script src="modulos/restaurante/rest-burgers.js"></script>
+
+<script>
+const P = Pedido, esc = P.esc, plata = P.plata;
+const wa = (n, t) => `https://wa.me/${String(n).replace(/\D/g, '')}?text=${encodeURIComponent(t)}`;
+document.querySelectorAll('[data-wa]').forEach(a => { a.href = wa(DEMO.waCliente, a.dataset.wa); a.target = '_blank'; a.rel = 'noopener'; });
+['ig', 'ig2'].forEach(i => { const a = document.getElementById(i); if (a) a.href = DEMO.instagram; });   // sin Instagram en cliente.json, los enlaces no se pintan
+{ const fb = document.getElementById('fb'); if (fb) fb.href = DEMO.facebook; }
+P.pintarCarta('#carta-lista');
+
+/* Premium: envío por sector (todo Ambato) y pedido programado. El precio real sale de la base; si no responde, los datos del cliente. */
+{ const aplicar = ss => { DEMO.sectores = ss.map(z => ({ nombre: z.nombre, costo: RESTDATA.envio_por_confirmar ? null : z.costo_cent, ejemplo: !!RESTDATA.sectores_ejemplo })); DEMO.programar = true; };
+  aplicar(RESTDATA.sectores); REST.rpc('carta').then(c => aplicar(c.sectores)).catch(() => {}); }
+{ const q = new URLSearchParams(location.search).get('pedir'); if (q && P.items.has(q)) setTimeout(() => P.abrirProducto(q), 500); }   /* viene de la vitrina de burgers: «Pedir esta burger» */
+
+/* Diagnóstico: recomienda solo productos reales de la carta. Preguntas y reglas vienen de cliente.json → diag */
+const DIAG = {"titulo": "¿Qué Big Burger eres hoy?", "sub": "Tres preguntas y te decimos cuál pedir", "fino": "Tres preguntas", "intro": "Dinos cuánta hambre traes y qué sabor te llama: te recomendamos una burger de la carta y la sumas a tu pedido con un toque.", "hoy": "Tu Big Burger de hoy", "preguntas": [{"clave": "hambre", "texto": "¿Cuánta hambre traes?", "opciones": [{"valor": "antojo", "texto": "Un antojo", "detalle": "Algo rico y directo"}, {"valor": "seria", "texto": "Hambre de verdad", "detalle": "Una burger bien armada"}, {"valor": "campeonato", "texto": "Hambre de campeonato", "detalle": "La más cargada de la carta"}]}, {"clave": "sabor", "texto": "¿Qué sabor te llama?", "opciones": [{"valor": "clasico", "texto": "Lo clásico", "detalle": "Carne, queso y salsa de la casa"}, {"valor": "tocino", "texto": "Tocino y queso", "detalle": "Crujiente y fundido"}, {"valor": "dulce", "texto": "Dulce y salado", "detalle": "Miel maple o piña a la plancha"}, {"valor": "hongos", "texto": "Con champiñones", "detalle": "Portobello y queso labneh"}]}, {"clave": "quien", "texto": "¿Para quién es?", "opciones": [{"valor": "yo", "texto": "Solo para mí"}, {"valor": "compartir", "texto": "Somos dos o más", "detalle": "Te sugerimos otra para acompañar"}]}], "reglas": [{"si": {"sabor": "hongos"}, "id": "portobello"}, {"si": {"sabor": "dulce", "hambre": "antojo"}, "id": "hawaiian-bbq"}, {"si": {"sabor": "dulce"}, "id": "big-mapple"}, {"si": {"sabor": "tocino", "hambre": "campeonato"}, "id": "tocino-lovers"}, {"si": {"sabor": "tocino", "hambre": "seria"}, "id": "doble-americana"}, {"si": {"sabor": "tocino"}, "id": "bacon-cheese"}, {"si": {"sabor": "clasico", "hambre": "campeonato"}, "id": "doble-americana"}, {"si": {"sabor": "clasico", "hambre": "seria"}, "id": "americana"}, {"si": {"sabor": "clasico"}, "id": "cheddar"}], "defecto": "clasica", "compartir": {"clave": "quien", "valor": "compartir", "id": "clasica", "texto": "¿Son más? Suma una"}};
+const preguntas = DIAG.preguntas.map(q => ({ k: q.clave, t: q.texto, ops: q.opciones.map(o => [o.valor, o.texto, o.detalle || '']) }));
+function recomendar(r) {
+  for (const g of DIAG.reglas) if (Object.entries(g.si).every(([k, v]) => r[k] === v)) return g.id;
+  return DIAG.defecto;
+}
+const s = { paso: 0, r: {} }, caja = document.getElementById('caja-diag'), N = preguntas.length;
+const cab = `<div class="caja-cab"><img src="assets/logo.webp" alt="" width="42" height="42"><div><b>${esc(DIAG.titulo)}</b><small>${esc(DIAG.sub)}</small></div></div>`;
+function pintar() {
+  if (s.paso < N) {
+    const q = preguntas[s.paso];
+    caja.innerHTML = `${cab}<div class="prog"><span>Paso ${s.paso + 1} de ${N}</span><div class="pista"><div style="width:${s.paso / N * 100}%"></div></div></div>
+      <div class="fx-paso" style="display:flex;flex-direction:column;gap:14px"><h3>${esc(q.t)}</h3>
+      <div class="ops">${q.ops.map(([v, t, d]) => `<button type="button" class="op" data-v="${esc(v)}"><span>${esc(t)}${d ? `<small>${esc(d)}</small>` : ''}</span></button>`).join('')}</div>
+      ${s.paso ? '<button type="button" class="enlace" id="volver">Volver</button>' : ''}</div>`;
+    requestAnimationFrame(() => requestAnimationFrame(() => { caja.querySelector('.pista div').style.width = ((s.paso + 1) / N * 100) + '%'; }));
+    caja.querySelectorAll('.op').forEach(b => b.onclick = () => { s.r[q.k] = b.dataset.v; s.paso++; pintar(); });
+    const v = document.getElementById('volver'); if (v) v.onclick = () => { s.paso--; pintar(); };
+  } else {
+    const id = recomendar(s.r), it = P.items.get(id);
+    const comp = s.r[DIAG.compartir.clave] === DIAG.compartir.valor ? P.items.get(DIAG.compartir.id) : null;
+    caja.innerHTML = `${cab}<div class="fx-paso" style="display:flex;flex-direction:column;gap:14px">
+      <div class="reco"><small>${esc(DIAG.hoy)}</small><b>${esc(it.nombre)}</b>${it.lema ? `<p><strong>${esc(it.lema)}.</strong></p>` : ''}
+        <p>${it.desc ? esc(it.desc) : '<span class="pend">[CONFIRMAR ingredientes]</span>'}</p><div class="precio">${plata(it.precio)}</div></div>
+      ${comp ? `<p>${esc(DIAG.compartir.texto)} <strong>${esc(comp.nombre)}</strong> por ${plata(comp.precio)}.</p>` : ''}
+      <button type="button" class="btn" id="add-reco">Agregar a mi pedido</button>
+      ${comp ? `<button type="button" class="btn btn-linea" id="add-comp">Sumar ${esc(comp.nombre)}</button>` : ''}
+      <div style="display:flex;gap:18px;flex-wrap:wrap"><a class="enlace" href="#carta">Ver toda la carta</a><button type="button" class="enlace" id="otra">Probar otra vez</button></div></div>`;
+    document.getElementById('add-reco').onclick = () => P.abrirProducto(id);
+    const c = document.getElementById('add-comp'); if (c) c.onclick = () => { P.abrirProducto(DIAG.compartir.id); c.disabled = true; c.textContent = 'Agregadas ✓'; };
+    document.getElementById('otra').onclick = () => { s.paso = 0; s.r = {}; pintar(); };
+  }
+}
+pintar();
+
+</script>
+<script src="fx.js"></script>
+
+</body>
+</html>

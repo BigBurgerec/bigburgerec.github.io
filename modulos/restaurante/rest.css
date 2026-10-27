@@ -1,0 +1,192 @@
+/* Módulo de restaurante · estilos de la vitrina de burgers, el dashboard del dueño y la pantalla de ventas.
+   Colores y fuentes SOLO de variables --fx-* de la marca. Animación: solo transform y opacity (CLAUDE.md §6), con prefers-reduced-motion al final.
+   Los colores de datos (canales y estados) son los validados con la guía dataviz en modo oscuro (ver --d-*). */
+body.rest-oscuro { background: var(--fx-deep-2); color: var(--fx-bg); padding-bottom: 0; }
+.rest-oscuro .cabecera { background: color-mix(in srgb, var(--fx-deep-2) 88%, transparent); backdrop-filter: blur(8px); }
+.rest-oscuro a:focus-visible, .rest-oscuro button:focus-visible, .rest-oscuro input:focus-visible { outline: 3px solid var(--fx-pop); outline-offset: 3px; }
+[hidden] { display: none !important; }
+/* las pantallas del local (dashboard y ventas) se navegan entre sí: el menú de la cabecera no se oculta en el celular */
+.rest-oscuro .cabecera nav { display: flex; flex-wrap: wrap; justify-content: flex-end; }
+@media (max-width: 560px) { .rest-oscuro .cabecera .wrap { flex-wrap: wrap; row-gap: 0; padding-block: 6px; } .rest-oscuro .cabecera nav a { padding: 0 9px; font-size: .95rem; min-height: 40px; } .rest-oscuro .marca small { display: none; } }
+
+/* ====================== VITRINA DE BURGERS (la que ve el cliente) ====================== */
+/* Estructura de la referencia (filas gigantes del nombre detrás de la burger, pie con frase + nombre + flechas, menú a pantalla completa, contador LED)
+   con los colores y tipografías de la marca. Movimiento: solo transform y opacity. */
+.rb-cab { position: absolute; z-index: 20; inset: 0 0 auto 0; }
+.rb-cab .wrap { width: min(1500px, 100% - 36px); display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 88px; }
+.rb-cab-izq, .rb-cab-der { display: flex; align-items: center; gap: 14px; }
+.rb-logo img { width: 52px; height: 52px; border-radius: 50%; }
+.rb-menu-btn { width: 52px; height: 52px; border: 0; background: transparent; color: var(--fx-bg); cursor: pointer; display: grid; place-content: center; gap: 7px; }
+.rb-menu-btn i { display: block; width: 44px; height: 2px; background: currentColor; }
+.rb-pill { min-height: 46px; padding: 0 22px; border-radius: 999px; border: 2px solid var(--fx-bg); color: var(--fx-bg); background: transparent; font: 800 .98rem/1 var(--fx-font-txt); letter-spacing: .06em; text-transform: uppercase; text-decoration: none; display: inline-flex; align-items: center; cursor: pointer; }
+.rb-pill.lleno { background: var(--fx-accent); border-color: var(--fx-accent); color: var(--fx-deep); }
+@media (max-width: 560px) { .rb-pill.solo-grande { display: none; } .rb-pill { padding: 0 16px; } }
+
+.rb-hero { position: relative; overflow: hidden; min-height: min(100svh, 920px); padding-bottom: 160px; display: flex; flex-direction: column; background: var(--fx-deep-2); isolation: isolate; }
+.rb-glow { position: absolute; inset: 0; z-index: -2; opacity: 0; transition: opacity .7s ease; background: radial-gradient(closest-side at 50% 48%, var(--g) 0%, color-mix(in srgb, var(--g) 30%, transparent) 55%, transparent 100%); transform: scale(1.3); }
+.rb-glow.on { opacity: .8; }
+.rb-filas { position: absolute; z-index: -1; inset: 11% 0 auto 0; display: grid; gap: .02em; font: 900 clamp(4.4rem, 13.5vw, 13rem)/.84 var(--fx-font-disp); text-transform: uppercase; transition: opacity .35s ease; }
+.rb-filas.cambia { opacity: 0; }
+.rb-fila { white-space: nowrap; overflow: visible; color: var(--fx-bg); }
+.rb-fila span { display: inline-block; will-change: transform; }
+.rb-fila.contorno { color: transparent; -webkit-text-stroke: 2px var(--fx-bg); }
+.rb-fila:nth-child(1) span { transform: translateX(-9%); } .rb-fila:nth-child(3) span { transform: translateX(-26%); }
+.rb-fila:nth-child(2) span { animation: rb-izq 60s linear infinite alternate; } .rb-fila:nth-child(4) span { animation: rb-der 60s linear infinite alternate; }
+@keyframes rb-izq { from { transform: translateX(-4%); } to { transform: translateX(-24%); } }
+@keyframes rb-der { from { transform: translateX(-30%); } to { transform: translateX(-10%); } }
+.rb-escena { position: relative; z-index: 2; flex: none; height: clamp(300px, 40vw, 580px); margin-top: clamp(130px, 10.5vw, 170px); }
+.rb-slide { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; transform: translate3d(8%, 0, 0) scale(.92); transition: opacity .5s ease, transform .6s cubic-bezier(.2, .8, .2, 1); pointer-events: none; }
+.rb-slide.on { opacity: 1; transform: none; pointer-events: auto; }
+.rb-slide.antes { transform: translate3d(-8%, 0, 0) scale(.92); }
+.rb-slide img { height: 100%; width: auto; max-width: 94%; object-fit: contain; filter: drop-shadow(0 36px 44px rgba(0, 0, 0, .6)); }
+.rb-pie { position: absolute; z-index: 6; left: 0; right: 0; bottom: 0; padding: 0 clamp(18px, 3vw, 44px) clamp(22px, 3vw, 38px); display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; background: linear-gradient(0deg, color-mix(in srgb, var(--fx-deep-2) 88%, transparent) 0%, transparent 100%); padding-top: 90px; }
+.rb-texto { min-width: 0; }
+.rb-intro { font: 600 clamp(1rem, 1.6vw, 1.25rem)/1.2 var(--fx-font-txt); margin-bottom: 8px; color: var(--fx-bg); }
+.rb-nombre { font: 900 clamp(2.4rem, 6.6vw, 5.4rem)/.92 var(--fx-font-disp); text-transform: uppercase; }
+.rb-desc { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; font: 800 clamp(1.05rem, 1.7vw, 1.4rem)/1 var(--fx-font-txt); text-transform: uppercase; letter-spacing: .03em; color: var(--fx-bg); text-decoration: none; }
+.rb-desc svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2.4; }
+.rb-precio { display: inline-block; margin-right: 14px; padding-right: 14px; border-right: 2px solid var(--fx-bg); font: 800 clamp(1.4rem, 2.3vw, 2rem)/1 var(--fx-font-txt); }
+.rb-derecha { display: flex; flex-direction: column; align-items: flex-end; gap: 14px; flex-shrink: 0; }
+.rb-controles { display: flex; align-items: center; gap: 12px; }
+.rb-flecha { width: 48px; height: 48px; border: 0; background: transparent; color: var(--fx-bg); cursor: pointer; display: grid; place-items: center; }
+.rb-flecha svg { width: 30px; height: 30px; stroke: currentColor; fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.rb-contador { width: 76px; height: 76px; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--fx-bg) 55%, transparent); display: grid; place-items: center; font: 800 2.2rem/1 var(--fx-font-txt); }
+@media (max-width: 760px) {
+  .rb-pie { flex-direction: column; align-items: flex-start; }
+  .rb-derecha { flex-direction: row; align-items: center; justify-content: space-between; width: 100%; }
+  .rb-contador { width: 56px; height: 56px; font-size: 1.5rem; }
+  .rb-escena { height: 340px; margin-top: 150px; margin-bottom: 70px; } .rb-filas { inset-block-start: 20%; }
+}
+
+/* Menú a pantalla completa */
+.rb-menu { border: 0; padding: 0; width: 100vw; height: 100dvh; max-width: none; max-height: none; background: var(--fx-accent); color: var(--fx-deep); }
+.rb-menu::backdrop { background: var(--fx-deep-2); }
+.rb-menu[open] { display: grid; grid-template-rows: auto 1fr auto; }
+.rb-menu-cab { display: flex; justify-content: space-between; align-items: flex-start; }
+.rb-menu-x { width: 76px; height: 76px; border: 0; background: var(--fx-deep); color: var(--fx-bg); cursor: pointer; display: grid; place-items: center; }
+.rb-menu-x svg { width: 40px; height: 40px; stroke: currentColor; fill: none; stroke-width: 1.6; }
+.rb-menu nav { padding: clamp(10px, 3vw, 40px) clamp(24px, 6vw, 90px); display: grid; align-content: center; gap: 4px; }
+.rb-menu nav a { font: 900 clamp(2.6rem, 9vw, 6.4rem)/.95 var(--fx-font-disp); text-transform: uppercase; text-decoration: none; color: var(--fx-deep); width: fit-content; }
+.rb-menu nav a:hover, .rb-menu nav a:focus-visible { color: var(--fx-bg); }
+.rb-menu footer { display: flex; justify-content: space-between; align-items: flex-end; gap: 14px; padding: 0 clamp(24px, 6vw, 90px) clamp(18px, 3vw, 36px); }
+.rb-menu footer p { font: 700 1.1rem/1.6 var(--fx-font-txt); text-transform: uppercase; letter-spacing: .04em; }
+.rb-sello { position: relative; width: clamp(120px, 14vw, 190px); height: clamp(120px, 14vw, 190px); border-radius: 50%; background: var(--fx-deep); color: var(--fx-bg); display: grid; place-items: center; text-decoration: none; flex-shrink: 0; }
+.rb-sello svg.giro { position: absolute; inset: 0; width: 100%; height: 100%; animation: rb-gira 18s linear infinite; }
+.rb-sello svg.giro text { font: 900 15.5px var(--fx-font-disp); letter-spacing: .12em; text-transform: uppercase; fill: currentColor; }
+.rb-sello svg.flecha { width: 38%; height: 38%; fill: none; stroke: currentColor; stroke-width: 3.4; stroke-linecap: square; }
+@keyframes rb-gira { to { transform: rotate(360deg); } }
+
+/* Contador LED: puntos como los marcadores (datos reales del negocio, solo si el dueño lo activa) */
+.rb-led { background: var(--fx-deep-2); padding-block: clamp(50px, 8vw, 100px); text-align: center; border-top: 1px solid var(--fx-line-deep); }
+.rb-led h2 { font: 900 clamp(1.7rem, 4.6vw, 3.4rem)/1 var(--fx-font-disp); text-transform: uppercase; }
+.rb-led-cifras { display: flex; justify-content: center; gap: clamp(8px, 2vw, 22px); margin-top: clamp(20px, 3vw, 36px); flex-wrap: nowrap; }
+.rb-led-cifras .sep { width: clamp(8px, 2vw, 22px); }
+.rb-dig { width: clamp(34px, 8vw, 96px); aspect-ratio: 5 / 7; display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(7, 1fr); gap: clamp(1px, .35vw, 4px); }
+.rb-dig i { border-radius: 50%; background: color-mix(in srgb, var(--fx-bg) 9%, transparent); } .rb-dig i.on { background: var(--fx-accent); box-shadow: 0 0 .5em color-mix(in srgb, var(--fx-accent) 70%, transparent); }
+.rb-led p { margin-top: 18px; color: var(--fx-soft-2); font-size: 1.02rem; }
+.rb-ejemplo { display: inline-block; margin-top: 12px; padding: 5px 12px; border-radius: 999px; font: 700 .9rem/1 var(--fx-font-txt); background: var(--fx-marca-bg); color: var(--fx-marca-ink); }
+
+/* Categorías en fila (desliza con el dedo) */
+.rb-cats { background: var(--fx-deep-2); padding-block: clamp(34px, 5vw, 60px) 10px; }
+.rb-cats .fila { display: grid; grid-auto-flow: column; grid-auto-columns: min(78vw, 340px); gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 18px; padding: 0 18px 14px; scrollbar-width: thin; }
+.rb-cat { scroll-snap-align: start; text-decoration: none; color: var(--fx-bg); }
+.rb-cat .foto { height: clamp(150px, 20vw, 220px); border: 2px solid var(--fx-bg); border-radius: 22px; background: color-mix(in srgb, var(--fx-deep) 70%, var(--fx-deep-2)); display: grid; place-items: center; overflow: hidden; }
+.rb-cat .foto img { height: 88%; width: auto; object-fit: contain; filter: drop-shadow(0 14px 16px rgba(0, 0, 0, .5)); }
+.rb-cat .foto .marca-agua { height: 46%; width: auto; opacity: .35; filter: grayscale(.4); }
+.rb-cat h3 { margin-top: 12px; font: 900 1.5rem/1 var(--fx-font-disp); text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+.rb-cat h3 svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2.6; }
+.rb-cat p { margin-top: 4px; color: var(--fx-soft-2); font-size: 1.02rem; }
+
+.rb-boton { min-height: 52px; padding: 0 26px; border-radius: 999px; font: 800 1.1rem/1 var(--fx-font-txt); text-decoration: none; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid var(--fx-bg); color: var(--fx-bg); background: transparent; letter-spacing: .03em; text-transform: uppercase; }
+.rb-boton.lleno { background: var(--fx-accent); border-color: var(--fx-accent); color: var(--fx-deep); }
+.rb-detalle { background: var(--fx-deep-2); padding-block: clamp(28px, 5vw, 56px); border-top: 1px solid var(--fx-line-deep); }
+.rb-detalle .wrap { display: grid; gap: 22px 40px; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: start; }
+@media (max-width: 820px) { .rb-detalle .wrap { grid-template-columns: 1fr; } }
+.rb-detalle h2 { font: 800 clamp(1.8rem, 4vw, 2.6rem)/1 var(--fx-font-disp); text-transform: uppercase; }
+.rb-detalle h2 span { font-weight: 300; display: block; font-size: .55em; margin-bottom: 4px; color: var(--fx-pop); }
+.rb-fichas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.rb-ficha { padding: 9px 16px; border-radius: 999px; border: 1px solid var(--fx-line-deep); background: color-mix(in srgb, var(--fx-bg) 6%, transparent); font: 600 1.05rem/1.2 var(--fx-font-txt); }
+.rb-quedan { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; padding: 9px 16px; border-radius: 10px; font: 700 1.05rem/1.2 var(--fx-font-txt); background: color-mix(in srgb, var(--fx-bg) 8%, transparent); }
+.rb-quedan i { width: 10px; height: 10px; border-radius: 50%; background: var(--d-ok, #0ca30c); }
+.rb-quedan.bajo i { background: var(--d-aviso, #fab219); } .rb-quedan.agotado i { background: var(--d-crit, #d03b3b); }
+.rb-carta { background: var(--fx-deep); padding-block: clamp(48px, 7vw, 90px); }
+.rb-carta h2 { font: 800 clamp(2.2rem, 6vw, 3.8rem)/.95 var(--fx-font-disp); text-transform: uppercase; }
+.rb-carta h2 span { display: block; font-weight: 300; font-size: .5em; color: var(--fx-pop); margin-bottom: 4px; }
+.rb-grid { display: grid; gap: 16px; margin-top: 30px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); }
+.rb-tarjeta { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 18px; border-radius: 18px; border: 1px solid var(--fx-line-deep); background: color-mix(in srgb, var(--fx-deep-2) 60%, var(--fx-deep)); min-height: 220px; }
+.rb-tarjeta img { height: 110px; width: auto; max-width: 100%; margin: -4px auto 4px; object-fit: contain; filter: drop-shadow(0 14px 16px rgba(0, 0, 0, .45)); }
+.rb-tarjeta h3 { font: 800 1.45rem/1 var(--fx-font-disp); text-transform: uppercase; }
+.rb-tarjeta p { color: var(--fx-soft-2); font-size: 1rem; line-height: 1.35; flex: 1; }
+.rb-tarjeta .fila { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 8px; }
+.rb-tarjeta .fila b { font: 800 1.35rem/1 var(--fx-font-txt); }
+.rb-tarjeta .agotada { position: absolute; top: 14px; right: 14px; font: 800 .85rem/1 var(--fx-font-txt); padding: 6px 10px; border-radius: 999px; background: var(--d-crit, #d03b3b); color: #fff; text-transform: uppercase; }
+.rb-tarjeta .rb-boton { min-height: 44px; padding: 0 18px; font-size: 1rem; }
+
+/* ====================== PÁGINA COMPLETA EN ESTILO VITRINA (body.rb-pagina) ======================
+   La landing de un cliente con el módulo de restaurante usa la vitrina como inicio y el resto de las secciones en el mismo estilo oscuro:
+   fondos petróleo, titulares de dos pesos, píldoras en vez de sombras duras, tarjetas de línea fina. Solo variables --fx-* de la marca. */
+body.rb-pagina { background: var(--fx-deep-2); color: var(--fx-bg); }
+.rb-pagina .sec { background: var(--fx-deep-2); color: var(--fx-bg); }
+.rb-pagina .sec.papel, .rb-pagina .sec.arena, .rb-pagina .sec.oscuro.alt { background: var(--fx-deep); }
+.rb-pagina .oscuro { color: var(--fx-bg); }
+.rb-pagina .intro, .rb-pagina .pd-desc { color: var(--fx-soft-2); }
+.rb-pagina .doble span { color: var(--fx-pop); }
+.rb-pagina .sec + .sec { border-top: 1px solid var(--fx-line-deep); }
+.rb-pagina :focus-visible { outline-color: var(--fx-pop); }
+/* botones: píldora de acento o de contorno */
+.rb-pagina .btn { border-radius: 999px; border-color: var(--fx-accent); background: var(--fx-accent); background-image: none; color: var(--fx-deep); box-shadow: none; letter-spacing: .06em; }
+.rb-pagina .btn.btn-linea, .rb-pagina .oscuro .btn.btn-linea { background: transparent; color: var(--fx-bg); border: 2px solid var(--fx-bg); box-shadow: none; }
+.rb-pagina .btn:active, .rb-pagina .oscuro .btn:active { transform: scale(.97); box-shadow: none; }
+/* diagnóstico «¿Qué Gorila eres hoy?» */
+.rb-pagina .caja { background: color-mix(in srgb, var(--fx-deep) 78%, var(--fx-deep-2)); border: 1px solid var(--fx-line-deep); border-radius: 26px; box-shadow: none; }
+.rb-pagina .caja-cab { border-bottom: 1px solid var(--fx-line-deep); }
+.rb-pagina .prog .pista { background: color-mix(in srgb, var(--fx-bg) 14%, transparent); }
+.rb-pagina .op { background: color-mix(in srgb, var(--fx-bg) 6%, transparent); border: 1px solid var(--fx-line-deep); border-radius: 16px; color: var(--fx-bg); box-shadow: none; }
+.rb-pagina .op:active { transform: scale(.98); }
+.rb-pagina .op small { color: var(--fx-soft-2); }
+.rb-pagina .enlace { color: var(--fx-bg); }
+.rb-pagina .reco { background: var(--fx-accent); color: var(--fx-deep); border-radius: 18px; }
+.rb-pagina .reco small, .rb-pagina .reco p, .rb-pagina .reco .precio { color: var(--fx-deep); }
+.rb-pagina .paso p, .rb-pagina .cierre p { color: var(--fx-soft-2); }
+/* carta y pedido */
+.rb-pagina .pd-cat h2 .fino { color: var(--fx-pop); }
+.rb-pagina .pd-item { background: color-mix(in srgb, var(--fx-deep) 78%, var(--fx-deep-2)); border: 1px solid var(--fx-line-deep); border-radius: 20px; box-shadow: none; color: var(--fx-bg); }
+.rb-pagina .pd-lema { color: var(--fx-pop); }
+.rb-pagina .pd-lista .pd-item .pd-foto { border-radius: 14px; }
+.rb-pagina .pd-temporada { background: color-mix(in srgb, var(--fx-deep) 78%, var(--fx-deep-2)); border: 1px solid var(--fx-line-deep); border-radius: 24px; box-shadow: none; }
+.rb-pagina .pd-btn, .rb-pagina .pd-btn.pd-btn-full { border-radius: 999px; border-color: var(--fx-accent); box-shadow: none; letter-spacing: .05em; }
+.rb-pagina .pd-btn-sec { background: transparent; color: var(--fx-bg); border-color: var(--fx-bg); }
+.rb-pagina .pd-btn:active { transform: scale(.97); box-shadow: none; }
+.rb-pagina .pd-marca { background: var(--fx-marca-bg); color: var(--fx-marca-ink); }
+.rb-pagina .pd-barra { background: color-mix(in srgb, var(--fx-deep-2) 92%, transparent); backdrop-filter: blur(8px); border-top: 1px solid var(--fx-line-deep); }
+/* hoja del pedido (dialog): oscura, con campos de línea fina */
+.rb-pagina .pd-hoja { background: var(--fx-deep); color: var(--fx-bg); border: 1px solid var(--fx-line-deep); }
+.rb-pagina .pd-hoja::backdrop { background: rgba(0, 0, 0, .7); }
+.rb-pagina .pd-cerrar, .rb-pagina .pd-hoja .pd-sub { color: var(--fx-bg); }
+.rb-pagina .pd-op > span, .rb-pagina .pd-chip > span { background: color-mix(in srgb, var(--fx-bg) 6%, transparent); border: 1px solid var(--fx-line-deep); color: var(--fx-bg); }
+.rb-pagina .pd-op input:checked + span, .rb-pagina .pd-chip input:checked + span { background: var(--fx-accent); border-color: var(--fx-accent); color: var(--fx-deep); box-shadow: none; }
+.rb-pagina .pd-op small { color: inherit; opacity: .85; }
+.rb-pagina .pd-campo input, .rb-pagina .pd-campo select { background: var(--fx-deep-2); color: var(--fx-bg); border: 1px solid var(--fx-line-deep); }
+.rb-pagina .pd-mini { background: transparent; border-color: var(--fx-line-deep); color: var(--fx-bg); }
+.rb-pagina .pd-linea { border-bottom: 1px solid var(--fx-line-deep); }
+.rb-pagina .pd-total { border-top: 1px solid var(--fx-line-deep); }
+.rb-pagina .pd-error { color: #ff9a9a; }
+.rb-pagina .pd-listo { background: var(--fx-accent); color: var(--fx-deep); }
+.rb-pagina .pd-cuenta { background: var(--fx-deep); color: var(--fx-bg); }
+/* qué cambia, galería, dónde, cierre */
+.rb-pagina .chat { background: color-mix(in srgb, var(--fx-deep) 78%, var(--fx-deep-2)); border: 1px solid var(--fx-line-deep); border-radius: 24px; }
+.rb-pagina .chat h3 { color: var(--fx-bg); }
+.rb-pagina .burbuja { color: #14201f; }
+.rb-pagina .chat.despues { background: color-mix(in srgb, var(--fx-bg) 8%, var(--fx-deep)); }
+.rb-pagina .galeria figure { border: 1px solid var(--fx-line-deep); border-radius: 24px; }
+.rb-pagina #donde .oscuro[data-reveal] { border: 1px solid var(--fx-line-deep) !important; box-shadow: none !important; border-radius: 24px !important; background: color-mix(in srgb, var(--fx-deep-2) 60%, var(--fx-deep)); }
+.rb-pagina .ico { border-width: 1.5px; }
+.rb-pagina footer { background: var(--fx-deep-2); color: var(--fx-soft-2); border-top: 1px solid var(--fx-line-deep); }
+/* cabecera de la vitrina que acompaña al bajar (aparece con fondo al salir del hero) */
+.rb-cab.fijo { position: fixed; background: color-mix(in srgb, var(--fx-deep-2) 90%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--fx-line-deep); }
+.rb-cab.fijo .wrap { min-height: 66px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rb-slide, .rb-glow, .rb-filas, .rest-tip, .rd-atenuado { transition: none; }
+  .rb-fila span, .rb-sello svg.giro, .rd-vivo i, .rd-feed .nuevo { animation: none; }
+}

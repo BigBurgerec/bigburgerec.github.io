@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /personal.html
+Disallow: /dashboard.html
+Disallow: /pantalla.html
+Sitemap: https://bigburgerec.github.io/sitemap.xml

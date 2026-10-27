@@ -1,0 +1,25 @@
+/* efectos/base.css · lo común a todos los perfiles: .fx-entra + .fx-d1…d4, .fx-rv, .fx-contador y el bloqueo de animaciones.
+   Solo transform y opacity. El ritmo (duración, curva, distancia) lo fija el perfil con variables:
+   --fx-dur, --fx-ease, --fx-dist. Para la aparición al hacer scroll con fx.js: --fx-rv-dur (ms), --fx-rv-step (ms),
+   --fx-rv-ease, --fx-rv-dist, --fx-rv-scale. Cada landing carga base.css + UN perfil (+ metal.css opcional). */
+:root { --fx-dur: .5s; --fx-ease: cubic-bezier(.2, .7, .2, 1); --fx-dist: 24px; }
+
+/* Aparición al cargar la página (hero, encabezados): una línea tras otra */
+@keyframes fx-entra { from { opacity: 0; transform: translateY(var(--fx-dist)); } }
+.fx-entra { animation: fx-entra var(--fx-dur) var(--fx-ease) both; }
+.fx-d1 { animation-delay: .05s; } .fx-d2 { animation-delay: .16s; } .fx-d3 { animation-delay: .3s; } .fx-d4 { animation-delay: .42s; }
+
+/* Aparición al hacer scroll solo con CSS. Sin soporte de animation-timeline el bloque se ve normal.
+   (fx.js hace lo mismo con [data-reveal] y [data-stagger] para los navegadores sin soporte.) */
+@keyframes fx-rv { from { opacity: 0; transform: translateY(var(--fx-dist)); } }
+@supports (animation-timeline: view()) {
+  .fx-rv { animation: fx-rv linear both; animation-timeline: view(); animation-range: entry 0% entry 55%; }
+}
+
+/* Contador de cifras reales: fx.js cuenta hasta el número que ya está escrito en el HTML */
+.fx-contador { font-variant-numeric: tabular-nums; }
+
+/* Sin movimiento: todo se ve completo y quieto */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

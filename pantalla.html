@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#121212">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&amp;family=Barlow:wght@400;600;700;800&amp;display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&amp;family=Barlow:wght@400;600;700;800&amp;display=swap"></noscript>
+<link rel="stylesheet" href="estilos/base.css">
+<link rel="stylesheet" href="efectos/base.css">
+<link rel="stylesheet" href="efectos/energia.css">
+<link rel="stylesheet" href="efectos/escaparate.css">
+<style>:root { --fx-bg: #F2F0EA; --fx-paper: #FAF8F3; --fx-accent: #E1AC25; --fx-ink: #121212; --fx-deep: #1A1A1A; --fx-pop: #E1AC25; --fx-font: "Barlow", "Arial Narrow", Arial, sans-serif; --fx-font-disp: "Oswald", Impact, "Arial Narrow", sans-serif; --fx-font-txt: "Barlow", "Arial Narrow", Arial, sans-serif; --fx-deep-2: #121212; --fx-line-deep: #2E2E2E; --fx-soft: #D9D6CF; --fx-soft-2: #A9A59D; --fx-warm: #E60202; --fx-chat: #ECE7DD; }</style>
+
+<title>Pide aquí · Big Burger</title>
+<meta name="description" content="Pantalla del local de Big Burger: el cliente arma su pedido en la tablet y paga en caja.">
+<link rel="manifest" href="pantalla.webmanifest">
+<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="modulos/restaurante/rest.css">
+<link rel="stylesheet" href="modulos/restaurante/rest-panel.css">
+<link rel="stylesheet" href="modulos/restaurante/rest-pantalla.css">
+</head>
+<body class="rest-oscuro kiosco" data-pagina="Pantalla en tienda" data-secciones='["Bienvenida", "Menú", "Tu pedido", "Confirmación"]'>
+<!-- Pantalla en tienda (kiosco): tablet vertical dentro del local. El cliente pide solo y paga en caja. Ver modulos/restaurante/README.md -->
+<main class="rest-panel" id="kp-entrada-caja"><div class="wrap"><div id="kp-entrada" hidden></div></div></main>
+
+<div class="kp" id="kp" hidden>
+  <!-- 1 · Reposo -->
+  <section class="kp-paso kp-reposo" id="kp-reposo" aria-label="Bienvenida">
+    <button type="button" class="kp-toca" id="kp-empezar">
+      <img class="kp-logo" src="assets/logo.webp" alt="" width="120" height="120" id="kp-logo">
+      <span class="kp-marca">Big Burger</span>
+      <span class="esc-sub"><span>Hamburguesas premium</span></span>
+      <span class="kp-foto" id="kp-foto"></span>
+      <span class="kp-cta">Toca para pedir</span>
+    </button>
+  </section>
+
+  <!-- 2 · Menú -->
+  <section class="kp-paso" id="kp-menu" aria-label="Menú" hidden>
+    <header class="kp-cab">
+      <button type="button" class="kp-volver" data-ir="reposo" aria-label="Volver al inicio"><img src="assets/logo.webp" alt="" width="56" height="56"></button>
+      <h1>Arma tu pedido</h1>
+    </header>
+    <nav class="kp-cats" id="kp-cats" aria-label="Categorías"></nav>
+    <div class="kp-grilla" id="kp-grilla"></div>
+    <footer class="kp-pie" id="kp-pie" hidden>
+      <span><b id="kp-n">0</b> <span id="kp-n-txt">productos</span> · <b id="kp-sub">$0.00</b></span>
+      <button type="button" class="rest-btn kp-grande" data-ir="pedido">Ver mi pedido</button>
+    </footer>
+  </section>
+
+  <!-- 3 · Tu pedido -->
+  <section class="kp-paso" id="kp-pedido" aria-label="Tu pedido" hidden>
+    <header class="kp-cab">
+      <button type="button" class="kp-volver texto" data-ir="menu">← Seguir pidiendo</button>
+      <h1>Tu pedido</h1>
+    </header>
+    <form class="kp-form" id="kp-form" autocomplete="off">
+      <ul class="kp-lineas" id="kp-lineas"></ul>
+      <div class="kp-total"><span>Total</span><b id="kp-total">$0.00</b></div>
+      <label class="rest-campo">Tu nombre<input name="nombre" maxlength="40" required placeholder="Para llamarte cuando esté listo" autocomplete="off"></label>
+      <fieldset class="kp-modo"><legend>¿Dónde lo comes?</legend>
+        <label><input type="radio" name="modo" value="aqui" required><span>Comer aquí</span></label>
+        <label><input type="radio" name="modo" value="llevar"><span>Para llevar</span></label>
+      </fieldset>
+      <label class="rest-campo">Nota para cocina (opcional)<textarea name="nota" maxlength="200" rows="2" placeholder="Ej.: sin cebolla"></textarea></label>
+      <div class="kp-pago"><b>Forma de pago</b><span>Pagas en caja al retirar tu pedido (efectivo o transferencia).</span></div>
+      <p class="rest-error" id="kp-error" role="alert" hidden></p>
+      <button type="submit" class="rest-btn kp-grande" id="kp-enviar">Enviar pedido</button>
+    </form>
+  </section>
+
+  <!-- 4 · Confirmación -->
+  <section class="kp-paso kp-listo" id="kp-listo" aria-label="Pedido enviado" hidden>
+    <p class="kp-listo-tit">¡Pedido enviado!</p>
+    <p class="kp-numero">#<span id="kp-numero"></span></p>
+    <p class="kp-listo-txt">Acércate a la caja para pagar <b id="kp-pagar"></b>. Te llamamos por tu nombre cuando esté listo.</p>
+    <button type="button" class="rest-btn kp-grande" data-ir="reposo">Listo</button>
+  </section>
+</div>
+
+<script>window.REST_PERSISTENTE = true;</script>
+<script src="config.js"></script>
+<script src="modulos/restaurante/restaurante-datos.js"></script>
+<script src="modulos/restaurante/rest-ui.js"></script>
+
+<script src="modulos/restaurante/rest-api.js"></script>
+<script src="modulos/restaurante/rest-pantalla.js"></script>
+</body>
+</html>

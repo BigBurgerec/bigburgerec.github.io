@@ -1,0 +1,79 @@
+/* estilos/base.css · layout común de toda demo, landing y propuesta.
+   Sin movimiento (eso vive en efectos/). Los colores y fuentes salen SOLO de variables --fx-*:
+   la marca las define en el :root de cada página (ver efectos-por-negocio.md). */
+:root {
+  /* Valores por defecto neutros: la marca del cliente los reemplaza en el :root de la página. */
+  --fx-font: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --fx-font-disp: var(--fx-font);
+  --fx-font-txt: var(--fx-font);
+  --fx-bg: #ffffff; --fx-paper: #f6f6f6; --fx-ink: #111111; --fx-deep: #1c1c1c; --fx-accent: #777777; --fx-pop: #dddddd;
+  /* Derivados: se calculan desde la marca; se pueden fijar a mano en el :root de la página. */
+  --fx-deep-2: color-mix(in srgb, var(--fx-deep) 55%, #000);
+  --fx-line-deep: color-mix(in srgb, var(--fx-deep) 82%, #fff);
+  --fx-soft: color-mix(in srgb, var(--fx-bg) 86%, var(--fx-deep));
+  --fx-soft-2: color-mix(in srgb, var(--fx-bg) 72%, var(--fx-deep));
+  --fx-warm: color-mix(in srgb, var(--fx-accent) 60%, #000);
+  --fx-chat: color-mix(in srgb, var(--fx-bg) 85%, #000);
+  --fx-error: #8a1c1c;
+  /* Marcador [CONFIRMAR]/[MARCADOR]: es una señal de la agencia, no de la marca. */
+  --fx-marca-bg: #fff3c4; --fx-marca-ink: #5a3b00;
+  padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 78px); }
+body { margin: 0; background: var(--fx-bg); color: var(--fx-ink); font: 400 1.08rem/1.5 var(--fx-font-txt); -webkit-font-smoothing: antialiased; padding-bottom: 90px; }
+h1, h2, h3, p { margin: 0; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--fx-pop); outline-offset: 3px; }
+.wrap { width: min(1180px, 100% - 36px); margin-inline: auto; }
+.sec { padding-block: clamp(60px, 9vw, 110px); position: relative; }
+.oscuro { background: var(--fx-deep); color: var(--fx-bg); }
+.papel { background: var(--fx-paper); }
+.arena { background: var(--fx-pop); }
+
+/* Titulares de dos pesos (misma familia): línea fina + línea gruesa */
+.doble { font: 800 clamp(2.6rem, 7vw, 4.6rem)/.95 var(--fx-font-disp); }
+.doble span { display: block; font-weight: 300; font-size: .52em; line-height: 1; margin-bottom: .12em; }
+.intro { margin-top: 16px; max-width: 52ch; font-size: 1.15rem; }
+
+/* Botones (estructura; el acabado lo pone el perfil) */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 24px; font: 800 1.15rem/1 var(--fx-font-disp); text-decoration: none; border: 2px solid var(--fx-deep); border-radius: 10px; cursor: pointer; background: var(--fx-accent); color: var(--fx-deep); }
+.btn-linea { background: transparent; color: inherit; }
+.acciones { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 26px; }
+
+/* Barra superior (horario, ubicación, WhatsApp) y cabecera */
+.barra { background: var(--fx-deep-2); color: var(--fx-bg); font-size: .98rem; }
+.barra .wrap { display: flex; flex-wrap: wrap; gap: 4px 22px; align-items: center; justify-content: space-between; min-height: 42px; padding-block: 6px; }
+.barra .datos { display: flex; flex-wrap: wrap; gap: 2px 20px; }
+.barra span { display: inline-flex; align-items: center; gap: 7px; }
+.barra svg, .ico svg { width: 17px; height: 17px; stroke: var(--fx-pop); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.barra a { font: 800 .95rem/1 var(--fx-font-disp); text-decoration: none; min-height: 34px; display: inline-flex; align-items: center; padding: 0 14px; background: var(--fx-pop); color: var(--fx-deep); border-radius: 6px; }
+.cabecera { position: sticky; top: 0; z-index: 30; background: var(--fx-deep); border-bottom: 1px solid var(--fx-line-deep); }
+.cabecera .wrap { display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 70px; }
+.marca { display: flex; align-items: center; gap: 12px; color: var(--fx-bg); text-decoration: none; }
+.marca img { width: 52px; height: 52px; border-radius: 50%; }
+.marca b { font: 900 1.6rem/.9 var(--fx-font-disp); }
+.marca small { display: block; font: 400 .9rem/1.1 var(--fx-font-txt); color: var(--fx-pop); letter-spacing: .02em; }
+.cabecera nav { display: flex; gap: 4px; }
+.cabecera nav a { color: var(--fx-bg); text-decoration: none; font: 700 1.05rem/1 var(--fx-font-disp); min-height: 44px; display: inline-flex; align-items: center; padding: 0 12px; }
+@media (max-width: 760px) { .cabecera nav { display: none; } .barra .ocultable { display: none; } .barra .wrap { flex-wrap: nowrap; } .barra .datos { min-width: 0; } .barra .datos span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .barra a { flex-shrink: 0; } }
+
+/* Íconos de línea en círculo (un solo trazo) */
+.ico { width: 58px; height: 58px; border-radius: 50%; border: 2px solid currentColor; display: inline-grid; place-items: center; flex-shrink: 0; }
+.ico svg { width: 26px; height: 26px; stroke: currentColor; }
+
+/* WhatsApp flotante del cliente */
+.wa-flot { position: fixed; right: 16px; bottom: calc(96px + env(safe-area-inset-bottom, 0px)); z-index: 25; width: 58px; height: 58px; border-radius: 50%; background: #25D366; display: grid; place-items: center; box-shadow: 0 8px 24px rgba(0, 0, 0, .3); }
+.wa-flot svg { width: 30px; height: 30px; fill: #fff; position: relative; }
+
+/* Pie */
+footer { background: var(--fx-deep-2); color: var(--fx-soft-2); padding-block: 34px; font-size: 1rem; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 18px 34px; align-items: center; justify-content: space-between; }
+footer img { width: 64px; height: 64px; border-radius: 50%; }
+footer a { color: var(--fx-bg); }
+
+/* Marcador de dato pendiente */
+.pend { display: inline-block; font: 600 .8rem/1.3 var(--fx-font-txt); background: var(--fx-marca-bg); color: var(--fx-marca-ink); padding: 1px 7px; border-radius: 4px; vertical-align: middle; }
+
+@media print { .franja-demo, .demo-sug, .wa-flot, .pd-barra { display: none !important; } }

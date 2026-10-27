@@ -1,0 +1,71 @@
+/* efectos/energia.css · perfil ENERGÍA Y ANTOJO (bares, restaurantes, cafeterías, comida rápida).
+   Ritmo rápido (0.2–0.4 s) con rebote leve. Se carga después de base.css. Solo transform y opacity.
+   Colores solo por variables --fx-* (definidas en el :root de la página). Máx. 3 animaciones infinitas visibles a la vez. */
+:root {
+  --fx-dur: .45s; --fx-ease: cubic-bezier(.34, 1.56, .64, 1); --fx-dist: 26px; --fx-fast: .22s;
+  /* aparición al hacer scroll (fx.js) */
+  --fx-rv-dur: 380; --fx-rv-step: 70; --fx-rv-ease: cubic-bezier(.34, 1.56, .64, 1); --fx-rv-dist: 22px; --fx-rv-scale: .98;
+}
+
+/* Titulares de dos pesos, en mayúsculas y compactos */
+.doble { text-transform: uppercase; font: 900 clamp(2.8rem, 8vw, 5.4rem)/.86 var(--fx-font-disp); letter-spacing: .005em; }
+.doble span { font-weight: 300; font-size: .52em; line-height: 1; margin-bottom: .12em; }
+.marca b, .barra a, .cabecera nav a { text-transform: uppercase; }
+.marca b { letter-spacing: .03em; }
+.barra a { letter-spacing: .05em; }
+.cabecera nav a { letter-spacing: .05em; }
+
+/* 1. Botón con textura que se hunde al tocar */
+.btn { text-transform: uppercase; letter-spacing: .04em; box-shadow: 4px 4px 0 var(--fx-deep); transition: transform var(--fx-fast) var(--fx-ease), box-shadow var(--fx-fast);
+  background-image: radial-gradient(color-mix(in srgb, var(--fx-deep) 12%, transparent) 1px, transparent 1.2px); background-size: 5px 5px; }
+.btn:active { transform: translate(4px, 4px); box-shadow: 0 0 0 var(--fx-deep); }
+.oscuro .btn { border-color: var(--fx-bg); box-shadow: 4px 4px 0 var(--fx-bg); }
+.oscuro .btn:active { box-shadow: 0 0 0 var(--fx-bg); }
+.btn-linea { background-image: none; }
+
+/* 6. Sello girado */
+.sello { display: inline-grid; place-items: center; text-align: center; width: 132px; height: 132px; border-radius: 50%; background: var(--fx-pop); color: var(--fx-deep); border: 3px dashed var(--fx-deep); transform: rotate(-12deg); font: 900 1.15rem/1 var(--fx-font-disp); text-transform: uppercase; padding: 14px; box-shadow: 5px 5px 0 rgba(0, 0, 0, .35); }
+.sello small { display: block; font: 600 .82rem/1.15 var(--fx-font-txt); text-transform: none; margin-top: 4px; }
+
+/* 2. Cinta de píldoras en movimiento (1 animación infinita) */
+.cinta { overflow: hidden; background: var(--fx-pop); border-block: 3px solid var(--fx-deep); padding-block: 12px; }
+.cinta-pista { display: flex; width: max-content; animation: fx-cinta 32s linear infinite; }
+.cinta ul { display: flex; gap: 12px; list-style: none; margin: 0; padding: 0 6px; }
+.cinta li { font: 800 1.2rem/1 var(--fx-font-disp); text-transform: uppercase; letter-spacing: .04em; padding: 10px 18px; border: 2px solid var(--fx-deep); border-radius: 999px; background: var(--fx-paper); white-space: nowrap; }
+.cinta li:nth-child(3n) { background: var(--fx-deep); color: var(--fx-bg); }
+@keyframes fx-cinta { to { transform: translateX(-50%); } }
+
+/* 3. Texto contorneado */
+.contorno { font: 900 clamp(5rem, 22vw, 17rem)/.8 var(--fx-font-disp); text-transform: uppercase; color: transparent; -webkit-text-stroke: 2px color-mix(in srgb, var(--fx-pop) 35%, transparent); letter-spacing: .02em; pointer-events: none; user-select: none; }
+
+/* 8. Tarjeta con sombra sólida */
+.fx-tarjeta { background: var(--fx-paper); border: 3px solid var(--fx-deep); border-radius: 16px; box-shadow: 5px 5px 0 var(--fx-deep); }
+
+/* Pulso del WhatsApp flotante (1 animación infinita) */
+.wa-flot::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: #25D366; animation: fx-pulso-e 2.8s ease-out infinite; }
+@keyframes fx-pulso-e { from { transform: scale(1); opacity: .8; } to { transform: scale(1.6); opacity: 0; } }
+
+/* Entrada del hero (momento protagonista): usa .fx-entra .fx-d1…d4 de base.css; el titular grueso "golpea" y el sello gira al entrar */
+.fx-golpe { animation: fx-golpe .5s var(--fx-ease) .18s both; }
+@keyframes fx-golpe { from { opacity: 0; transform: scale(1.18); } 60% { opacity: 1; } }
+.fx-sello-in { animation: fx-sello-in .45s var(--fx-ease) .7s both; }
+@keyframes fx-sello-in { from { opacity: 0; transform: rotate(-40deg) scale(.6); } }
+
+/* Transición entre pasos del diagnóstico */
+.fx-paso { animation: fx-paso .3s var(--fx-ease) both; }
+@keyframes fx-paso { from { opacity: 0; transform: translateX(18px); } }
+
+/* Zoom lento de fotos (solo con mouse) */
+.fx-zoom { overflow: hidden; }
+.fx-zoom img { transition: transform 1.4s cubic-bezier(.2, .7, .2, 1); }
+@media (hover: hover) { .fx-zoom:hover img { transform: scale(1.06); } }
+
+/* 11. Neón que titila, para rótulos de neón. El texto lleva un brillo fijo; la capa de luz de detrás es la que titila,
+   solo con opacity (cuenta como animación infinita). Color: --fx-neon (por defecto --fx-pop). */
+.fx-neon { position: relative; isolation: isolate; color: var(--fx-neon, var(--fx-pop)); text-shadow: 0 0 .05em currentColor, 0 0 .35em color-mix(in srgb, currentColor 70%, transparent); }
+.fx-neon::after { content: ""; position: absolute; inset: -.25em -.4em; z-index: -1; pointer-events: none; border-radius: 40%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--fx-neon, var(--fx-pop)) 45%, transparent), transparent);
+  opacity: .9; animation: fx-neon 6s steps(1, end) infinite; }
+@keyframes fx-neon { 0%, 17%, 21%, 58%, 61%, 100% { opacity: .9; } 18%, 60% { opacity: .35; } 19.5% { opacity: .7; } }
+
+@media (prefers-reduced-motion: reduce) { .fx-neon::after { opacity: .9; } }
