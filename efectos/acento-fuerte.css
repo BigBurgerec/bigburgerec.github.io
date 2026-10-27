@@ -1,0 +1,13 @@
+/* efectos/acento-fuerte.css · complemento OPCIONAL (efectos.usar = ["acento-fuerte"]) para marcas cuyo acento es un color fuerte (rojo, azul, verde oscuro).
+   El kit pinta el texto sobre el acento con --fx-deep (oscuro), pensado para acentos claros (dorado, crema). Sobre un rojo saturado eso no llega a 4.5:1:
+   aquí el texto sobre el acento pasa a --fx-sobre-acento (blanco por defecto). Origen: Big Burger (rojo #E60202 del logo: blanco 4.8:1, oscuro 3.9:1).
+   Estático. Las hojas del módulo se cargan después: los selectores llevan «html body» para ganar sin !important. */
+html body .btn, html body .pd-btn:not(.pd-btn-sec), html body .rb-pill.lleno, html body .rb-boton.lleno, html body .rest-btn:not(.sec):not(.peligro),
+html body .esc-flecha, html body .kp-cta, html body .rp-tabs button[aria-selected="true"], html body.rb-pagina .reco, html body.rb-pagina .pd-listo,
+html body.rb-pagina .pd-op input:checked + span, html body.rb-pagina .pd-chip input:checked + span, html body .rp-prod .cant, html body .hub-card.principal {
+  color: var(--fx-sobre-acento, #fff);
+}
+html body.rb-pagina .btn.btn-linea, html body .pd-btn.pd-btn-sec { color: var(--fx-bg); }
+html body .rb-menu, html body .rb-menu nav a { color: var(--fx-sobre-acento, #fff); }
+html body .rb-menu nav a:focus-visible { color: var(--fx-deep); }
+html body.rb-pagina .reco small, html body.rb-pagina .reco .precio, html body.rb-pagina .reco p { color: var(--fx-sobre-acento, #fff); }

@@ -44,8 +44,8 @@
 
 /* ---------- subtítulo con reglas doradas (— HAMBURGUESAS PREMIUM —) ---------- */
 .esc-sub { position: relative; z-index: 2; margin: clamp(6px, 1vw, 14px) auto 0; display: flex; align-items: center; justify-content: center; gap: clamp(12px, 2vw, 22px);
-  font: 700 clamp(.95rem, 1.6vw, 1.35rem)/1 var(--fx-font-txt); letter-spacing: .18em; text-transform: uppercase; color: var(--fx-accent); }
-.esc-sub::before, .esc-sub::after { content: ""; width: clamp(34px, 7vw, 110px); height: 2px; background: var(--fx-accent); }
+  font: 700 clamp(.95rem, 1.6vw, 1.35rem)/1 var(--fx-font-txt); letter-spacing: .18em; text-transform: uppercase; color: var(--fx-oro, var(--fx-accent)); }   /* --fx-oro: segundo color de la marca, opcional */
+.esc-sub::before, .esc-sub::after { content: ""; width: clamp(34px, 7vw, 110px); height: 2px; background: var(--fx-oro, var(--fx-accent)); }
 
 /* ---------- pie: nombre de la burger con subrayado dorado y número ---------- */
 .esc-pie { position: relative; z-index: 3; display: flex; align-items: flex-end; justify-content: space-between; gap: 18px;
