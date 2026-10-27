@@ -15,11 +15,7 @@ insert into big_burger.productos (clave, nombre, categoria, precio_cent, lema, i
 on conflict (clave) do update set nombre = excluded.nombre, categoria = excluded.categoria, precio_cent = excluded.precio_cent, lema = excluded.lema,
   ingredientes = excluded.ingredientes, foto = excluded.foto, cuenta_burger = excluded.cuenta_burger, controla_stock = excluded.controla_stock, orden = excluded.orden;
 
-insert into big_burger.sectores (nombre, costo_cent, orden) values
-  ('[MARCADOR: sector 1]', 0, 0),
-  ('[MARCADOR: sector 2]', 0, 1),
-  ('[MARCADOR: sector 3]', 0, 2)
-on conflict (nombre) do update set costo_cent = excluded.costo_cent, orden = excluded.orden;
+-- Sin sectores de entrega todavía (solo para llevar). Se agregan después con sector_guardar(nombre, costo_cent, true, orden) o regenerando esta semilla.
 
 -- Primer dueño: crea el usuario en Supabase › Authentication › Add user (o reutiliza el que ya tenga por otro negocio) y luego corre, con su correo.
 -- En el proyecto COMPARTIDO el registro público queda encendido a propósito (CLAUDE.md §4.10): no se apaga; el acceso lo da solo la tabla staff de este schema.

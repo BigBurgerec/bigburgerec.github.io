@@ -24,8 +24,8 @@ Schema propio **`big_burger`** en el proyecto **compartido** `jukpaqtriemqvxormr
 | Dueño | `admin` | Todo: dashboard, stock del día, anular cualquier venta, carta, sectores, equipo, reporte del mes |
 
 ## Activar (una sola vez · lo hace Daniel)
-Antes: llenar en `clientes/big-burger/cliente.json` los **sectores con su costo**, el **WhatsApp** y los demás `[MARCADOR]`, y regenerar con
-`python3 scripts/migraciones-modulo.py restaurante big-burger --instalador` (si no, los sectores entran como `[MARCADOR]`).
+El instalador del 27 oct va **sin sectores** (solo para llevar; «a domicilio» está apagado en la web). Cuando lleguen los sectores con su costo se cargan con
+`insert into big_burger.sectores (nombre, costo_cent, orden) values ('Nombre del sector', 150, 1);` en el SQL Editor (costo en centavos: 150 = $1.50), y se vuelve a encender «a domicilio» en el sitio.
 1. **Confirmar que el schema no existe:** `select 1 from pg_namespace where nspname = 'big_burger';` debe salir vacío.
 2. **SQL Editor** → pegar `instalar-todo.sql` completo → **Run una sola vez**. Si el schema ya existe se detiene sin tocar nada.
 3. **Comprobar:**
@@ -39,7 +39,7 @@ Antes: llenar en `clientes/big-burger/cliente.json` los **sectores con su costo*
    ```sql
    insert into big_burger.staff (user_id, nombre, rol) select id, 'Dueño', 'admin' from auth.users where lower(email) = lower('CORREO_DEL_DUEÑO');
    ```
-   Los cajeros y la tablet los da de alta el dueño con su sesión, o desde SQL igual que arriba con rol `vendedor` o `pantalla`.
+   Más fácil: pegar `cuentas.sql` con los tres correos reales (dueño `admin`, caja `vendedor`, tablet `pantalla`).
 6. **No** se apaga el registro público de Authentication (lo usan otros negocios del proyecto, CLAUDE.md §4.10): una cuenta que no está en `big_burger.staff` no entra a nada.
 7. La **clave anon** se pega en `clientes/big-burger/cliente.json` → `restaurante.produccion.api.anonKey` (solo la anon, nunca `service_role`) y se regenera: `python3 scripts/nuevo-cliente.py big-burger --produccion`.
 8. **Prueba de humo:** `python3 scripts/probar-supabase.py big-burger` y la checklist corta: pedido web → aparece en caja → confirmar; pedido en la tablet → suena en caja → confirmar; dashboard sube; anular.

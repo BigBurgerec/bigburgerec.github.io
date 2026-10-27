@@ -7,25 +7,12 @@ window.DEMO = {
   "waCliente": "[MARCADOR: wa]",
   "direccion": "[MARCADOR: direccion]",
   "horario": "[MARCADOR: horario]",
-  "domicilio": "confirmar",
+  "domicilio": false,
   "envio": null,
   "claveDemo": "big_burger_demo_reservas",
   "saludoPedido": "Hola Big Burger, quiero hacer un pedido desde la web 🍔",
   "instagram": "",
   "facebook": "",
-  "sectoresEjemplo": [
-    {
-      "nombre": "[MARCADOR: sector 1]",
-      "costo": 0
-    },
-    {
-      "nombre": "[MARCADOR: sector 2]",
-      "costo": 0
-    },
-    {
-      "nombre": "[MARCADOR: sector 3]",
-      "costo": 0
-    }
-  ],
+  "sectoresEjemplo": [],
   "modo": null
 };
