@@ -107,7 +107,7 @@
 .demo-links { display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: center; margin-top: 22px; font-size: 1.02rem; }
 </style>
 </head>
-<body class="rb-pagina" data-pagina="Landing (Pro)" data-secciones='["Vitrina de burgers (inicio)", "¿Qué Big Burger eres hoy?", "Cómo pides", "Carta", "Galería", "Qué cambia", "Dónde estamos", "Cierre"]'>
+<body class="rb-pagina" data-pagina="Landing (Pro)" data-secciones='["Vitrina de burgers (inicio)", "Carta", "Galería", "Qué cambia", "Dónde estamos", "Cierre"]'>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
   <symbol id="i-reloj" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11.5a7 7 0 0 0-14 0C5 15 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
@@ -143,8 +143,6 @@
   <nav><a href="#inicio">Inicio</a>
   <a href="#rb-detalle">Las burgers</a>
   <a href="#carta">Carta</a>
-  <a href="#diagnostico">¿Qué Big Burger eres?</a>
-  <a href="#como">Cómo pides</a>
   <a href="#donde">Dónde estamos</a>
   </nav>
   <footer>
@@ -162,7 +160,7 @@
     <a class="rb-logo" href="#inicio" aria-label="Big Burger, inicio"><img src="assets/logo.webp" alt="" width="52" height="52"></a>
     <button type="button" class="rb-menu-btn" id="rb-abrir" aria-label="Abrir el menú" aria-haspopup="dialog"><i></i><i></i><i></i></button>
   </div>
-  <nav class="esc-nav" aria-label="Secciones"><a href="#diagnostico">¿Qué Big Burger eres?</a><a href="#carta">Carta</a><a href="#como">Cómo pides</a><a href="#donde">Dónde</a></nav>
+  <nav class="esc-nav" aria-label="Secciones"><a href="#carta">Carta</a><a href="#donde">Dónde</a></nav>
   <div class="rb-cab-der"><a class="rb-pill lleno" href="#carta" data-pedir>Ver menú</a></div>
 </div></header>
   <div id="rb-centinela" aria-hidden="true" style="position:absolute;top:140px;left:0;width:1px;height:1px;pointer-events:none"></div>
@@ -196,23 +194,9 @@
 
 
 
-<section class="sec papel diag" id="diagnostico"><div class="wrap">
-  <div data-reveal>
-    <h2 class="doble"><span>Tres preguntas</span>¿Qué Big Burger eres hoy?</h2>
-    <p class="intro">Dinos cuánta hambre traes y qué sabor te llama: te recomendamos una burger de la carta y la sumas a tu pedido con un toque.</p>
-  </div>
-  <div class="caja" id="caja-diag" aria-live="polite"></div>
-</div></section>
 
-<section class="sec oscuro" id="como"><div class="wrap">
-  <h2 class="doble" data-reveal><span>Así pides</span>sin pausas</h2>
-  <div class="pasos" data-stagger>
-    <div class="paso"><span class="ico"><svg><use href="#i-burger"/></svg></span><div><b>1</b><h3>Elige tu burger</h3><p>Desde la carta o con «¿Qué Big Burger eres hoy?». Tres líneas: Clásicas, Premium e Insignia.</p></div></div>
-    <div class="paso"><span class="ico"><svg><use href="#i-bolsa"/></svg></span><div><b>2</b><h3>Llevar o domicilio</h3><p>Retiras en el local o te lo llevamos. Si es a domicilio, compartes tu ubicación con un toque.</p></div></div>
-    <div class="paso"><span class="ico"><svg><use href="#i-envio"/></svg></span><div><b>3</b><h3>Envías y listo</h3><p>Tu pedido llega a WhatsApp con todo: burgers, extras, total y dirección.</p></div></div>
-    
-  </div>
-</div></section>
+
+
 
 
 
@@ -310,41 +294,6 @@ P.pintarCarta('#carta-lista');
   aplicar(RESTDATA.sectores); REST.rpc('carta').then(c => aplicar(c.sectores)).catch(() => {}); }
 { const q = new URLSearchParams(location.search).get('pedir'); if (q && P.items.has(q)) setTimeout(() => P.abrirProducto(q), 500); }   /* viene de la vitrina de burgers: «Pedir esta burger» */
 
-/* Diagnóstico: recomienda solo productos reales de la carta. Preguntas y reglas vienen de cliente.json → diag */
-const DIAG = {"titulo": "¿Qué Big Burger eres hoy?", "sub": "Tres preguntas y te decimos cuál pedir", "fino": "Tres preguntas", "intro": "Dinos cuánta hambre traes y qué sabor te llama: te recomendamos una burger de la carta y la sumas a tu pedido con un toque.", "hoy": "Tu Big Burger de hoy", "preguntas": [{"clave": "hambre", "texto": "¿Cuánta hambre traes?", "opciones": [{"valor": "antojo", "texto": "Un antojo", "detalle": "Algo rico y directo"}, {"valor": "seria", "texto": "Hambre de verdad", "detalle": "Una burger bien armada"}, {"valor": "campeonato", "texto": "Hambre de campeonato", "detalle": "La más cargada de la carta"}]}, {"clave": "sabor", "texto": "¿Qué sabor te llama?", "opciones": [{"valor": "clasico", "texto": "Lo clásico", "detalle": "Carne, queso y salsa de la casa"}, {"valor": "tocino", "texto": "Tocino y queso", "detalle": "Crujiente y fundido"}, {"valor": "dulce", "texto": "Dulce y salado", "detalle": "Miel maple o piña a la plancha"}, {"valor": "hongos", "texto": "Con champiñones", "detalle": "Portobello y queso labneh"}]}, {"clave": "quien", "texto": "¿Para quién es?", "opciones": [{"valor": "yo", "texto": "Solo para mí"}, {"valor": "compartir", "texto": "Somos dos o más", "detalle": "Te sugerimos otra para acompañar"}]}], "reglas": [{"si": {"sabor": "hongos"}, "id": "portobello"}, {"si": {"sabor": "dulce", "hambre": "antojo"}, "id": "hawaiian-bbq"}, {"si": {"sabor": "dulce"}, "id": "big-mapple"}, {"si": {"sabor": "tocino", "hambre": "campeonato"}, "id": "tocino-lovers"}, {"si": {"sabor": "tocino", "hambre": "seria"}, "id": "doble-americana"}, {"si": {"sabor": "tocino"}, "id": "bacon-cheese"}, {"si": {"sabor": "clasico", "hambre": "campeonato"}, "id": "doble-americana"}, {"si": {"sabor": "clasico", "hambre": "seria"}, "id": "americana"}, {"si": {"sabor": "clasico"}, "id": "cheddar"}], "defecto": "clasica", "compartir": {"clave": "quien", "valor": "compartir", "id": "clasica", "texto": "¿Son más? Suma una"}};
-const preguntas = DIAG.preguntas.map(q => ({ k: q.clave, t: q.texto, ops: q.opciones.map(o => [o.valor, o.texto, o.detalle || '']) }));
-function recomendar(r) {
-  for (const g of DIAG.reglas) if (Object.entries(g.si).every(([k, v]) => r[k] === v)) return g.id;
-  return DIAG.defecto;
-}
-const s = { paso: 0, r: {} }, caja = document.getElementById('caja-diag'), N = preguntas.length;
-const cab = `<div class="caja-cab"><img src="assets/logo.webp" alt="" width="42" height="42"><div><b>${esc(DIAG.titulo)}</b><small>${esc(DIAG.sub)}</small></div></div>`;
-function pintar() {
-  if (s.paso < N) {
-    const q = preguntas[s.paso];
-    caja.innerHTML = `${cab}<div class="prog"><span>Paso ${s.paso + 1} de ${N}</span><div class="pista"><div style="width:${s.paso / N * 100}%"></div></div></div>
-      <div class="fx-paso" style="display:flex;flex-direction:column;gap:14px"><h3>${esc(q.t)}</h3>
-      <div class="ops">${q.ops.map(([v, t, d]) => `<button type="button" class="op" data-v="${esc(v)}"><span>${esc(t)}${d ? `<small>${esc(d)}</small>` : ''}</span></button>`).join('')}</div>
-      ${s.paso ? '<button type="button" class="enlace" id="volver">Volver</button>' : ''}</div>`;
-    requestAnimationFrame(() => requestAnimationFrame(() => { caja.querySelector('.pista div').style.width = ((s.paso + 1) / N * 100) + '%'; }));
-    caja.querySelectorAll('.op').forEach(b => b.onclick = () => { s.r[q.k] = b.dataset.v; s.paso++; pintar(); });
-    const v = document.getElementById('volver'); if (v) v.onclick = () => { s.paso--; pintar(); };
-  } else {
-    const id = recomendar(s.r), it = P.items.get(id);
-    const comp = s.r[DIAG.compartir.clave] === DIAG.compartir.valor ? P.items.get(DIAG.compartir.id) : null;
-    caja.innerHTML = `${cab}<div class="fx-paso" style="display:flex;flex-direction:column;gap:14px">
-      <div class="reco"><small>${esc(DIAG.hoy)}</small><b>${esc(it.nombre)}</b>${it.lema ? `<p><strong>${esc(it.lema)}.</strong></p>` : ''}
-        <p>${it.desc ? esc(it.desc) : '<span class="pend">[CONFIRMAR ingredientes]</span>'}</p><div class="precio">${plata(it.precio)}</div></div>
-      ${comp ? `<p>${esc(DIAG.compartir.texto)} <strong>${esc(comp.nombre)}</strong> por ${plata(comp.precio)}.</p>` : ''}
-      <button type="button" class="btn" id="add-reco">Agregar a mi pedido</button>
-      ${comp ? `<button type="button" class="btn btn-linea" id="add-comp">Sumar ${esc(comp.nombre)}</button>` : ''}
-      <div style="display:flex;gap:18px;flex-wrap:wrap"><a class="enlace" href="#carta">Ver toda la carta</a><button type="button" class="enlace" id="otra">Probar otra vez</button></div></div>`;
-    document.getElementById('add-reco').onclick = () => P.abrirProducto(id);
-    const c = document.getElementById('add-comp'); if (c) c.onclick = () => { P.abrirProducto(DIAG.compartir.id); c.disabled = true; c.textContent = 'Agregadas ✓'; };
-    document.getElementById('otra').onclick = () => { s.paso = 0; s.r = {}; pintar(); };
-  }
-}
-pintar();
 
 </script>
 <script src="fx.js"></script>
