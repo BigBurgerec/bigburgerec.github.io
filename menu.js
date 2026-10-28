@@ -98,8 +98,41 @@ window.MENU = {
           "desc": "Pan de papa artesanal, carne 140 g, queso, tocino, queso labneh, champiñones portobello y salsa de la casa"
         }
       ]
+    },
+    {
+      "id": "bebidas",
+      "antes": "Para tomar",
+      "nombre": "Bebidas",
+      "extras": false,
+      "items": [
+        {
+          "id": "bebida-gaseosa",
+          "nombre": "Gaseosa personal",
+          "precio": 100,
+          "lema": null,
+          "desc": null
+        },
+        {
+          "id": "bebida-agua",
+          "nombre": "Agua sin gas",
+          "precio": 75,
+          "lema": null,
+          "desc": null
+        },
+        {
+          "id": "bebida-jugo",
+          "nombre": "Jugo natural",
+          "precio": 150,
+          "lema": null,
+          "desc": null
+        }
+      ]
     }
   ],
   "extras": [],
-  "temporada": null
+  "temporada": null,
+  "sugerir": {
+    "categoria": "bebidas",
+    "titulo": "¿Le sumas una bebida?"
+  }
 };

@@ -95,3 +95,14 @@
 .pd-lista .pd-item.con-foto { flex-wrap: wrap; align-items: stretch; }
 .pd-lista .pd-item .pd-foto { width: 100%; height: 220px; object-fit: cover; border-radius: 7px; }
 .pd-lista .pd-item.con-foto .pd-info { flex: 1 1 60%; }
+
+/* Sugerencia al revisar el pedido (menu.sugerir, ej. bebidas): botones de un toque que se suman al carrito */
+.pd-sugerir { margin: 6px 0 14px; }
+.pd-sugerir p { font: 800 1.05rem/1.2 var(--fx-font-disp); text-transform: uppercase; margin: 0 0 10px; }
+.pd-sugerir-fila { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; }
+.pd-sug { position: relative; flex: none; display: grid; gap: 4px; min-width: 120px; min-height: 64px; padding: 10px 14px; text-align: left; border-radius: 14px;
+  border: 2px solid color-mix(in srgb, currentColor 30%, transparent); background: transparent; color: inherit; cursor: pointer; font: 600 .98rem/1.2 var(--fx-font-txt); }
+.pd-sug b { font: 800 1rem/1 var(--fx-font-txt); color: var(--fx-pop); }
+.pd-sug.on { border-color: var(--fx-accent); }
+.pd-sug i { position: absolute; top: -8px; right: -8px; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 999px; display: grid; place-items: center;
+  background: var(--fx-accent); color: var(--fx-sobre-acento, var(--fx-deep)); font: 800 .85rem/1 var(--fx-font-txt); font-style: normal; }

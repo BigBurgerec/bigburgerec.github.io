@@ -11,7 +11,10 @@ insert into big_burger.productos (clave, nombre, categoria, precio_cent, lema, i
   ('doble-americana', 'Doble americana', 'premium', 550, null, 'Pan de papa artesanal, doble carne 140 g, doble queso cheddar, tocino y salsa de la casa', null, true, true, true, 6),
   ('big-mapple', 'Big Mapple Burger', 'insignia', 600, 'Pan de papa artesanal', 'Pan de papa artesanal, carne 140 g, tocino, queso, queso labneh, miel maple y salsa de la casa', null, true, true, true, 7),
   ('tocino-lovers', 'Tocino Lovers', 'insignia', 700, 'Pan de papa artesanal', 'Pan de papa artesanal, carne 140 g, doble queso, 4 tiras de tocino, cebolla caramelizada y salsa de la casa', null, true, true, true, 8),
-  ('portobello', 'Portobello', 'insignia', 750, 'Pan de papa artesanal', 'Pan de papa artesanal, carne 140 g, queso, tocino, queso labneh, champiñones portobello y salsa de la casa', null, true, true, true, 9)
+  ('portobello', 'Portobello', 'insignia', 750, 'Pan de papa artesanal', 'Pan de papa artesanal, carne 140 g, queso, tocino, queso labneh, champiñones portobello y salsa de la casa', null, true, true, true, 9),
+  ('bebida-gaseosa', 'Gaseosa personal', 'bebidas', 100, null, null, null, false, false, true, 10),
+  ('bebida-agua', 'Agua sin gas', 'bebidas', 75, null, null, null, false, false, true, 11),
+  ('bebida-jugo', 'Jugo natural', 'bebidas', 150, null, null, null, false, false, true, 12)
 on conflict (clave) do update set nombre = excluded.nombre, categoria = excluded.categoria, precio_cent = excluded.precio_cent, lema = excluded.lema,
   ingredientes = excluded.ingredientes, foto = excluded.foto, cuenta_burger = excluded.cuenta_burger, controla_stock = excluded.controla_stock, orden = excluded.orden;
 

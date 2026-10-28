@@ -66,6 +66,13 @@
     $$('[data-mas]', $('#kp-lineas')).forEach(b => b.onclick = () => { sumar(b.dataset.mas, 1); pintarPedido(); });
     $$('[data-menos]', $('#kp-lineas')).forEach(b => b.onclick = () => { sumar(b.dataset.menos, -1); pintarPedido(); });
     $('#kp-total').textContent = plata(subtotal());
+    /* sugerencia (menu.sugerir, ej. bebidas): fila de un toque antes del nombre */
+    const sc = R.sugerir && (R.categorias || []).find(c => c.id === R.sugerir.categoria), caja = $('#kp-sugerir');
+    const ps = sc ? sc.ids.map(id => productos.find(p => p.clave === id)).filter(p => p && !p.agotado) : [];
+    caja.hidden = !ps.length;
+    caja.innerHTML = ps.length ? `<p>${esc(R.sugerir.titulo || '¿Le sumas algo más?')}</p><div class="kp-sug-fila">${ps.map(p => { const n = carrito.get(p.clave) || 0;
+      return `<button type="button" class="kp-sug${n ? ' on' : ''}" data-sug="${esc(p.clave)}"><span>${esc(p.nombre)}</span><b>+${plata(p.precio_cent)}</b>${n ? `<i>${n}</i>` : ''}</button>`; }).join('')}</div>` : '';
+    $$('[data-sug]', caja).forEach(b => b.onclick = () => { sumar(b.dataset.sug, 1); pintarPedido(); });
   }
 
   $('#kp-form').onsubmit = async e => {

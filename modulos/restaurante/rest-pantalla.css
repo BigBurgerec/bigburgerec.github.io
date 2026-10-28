@@ -75,3 +75,13 @@ body.kiosco { background: var(--fx-deep-2); color: var(--fx-bg); overscroll-beha
 .kp-listo-txt { max-width: 30ch; font-size: 1.35rem; color: var(--fx-soft); }
 
 @media (prefers-reduced-motion: reduce) { .kp-cta { animation: none; } }
+
+/* sugerencia en «Tu pedido» (menu.sugerir, ej. bebidas) */
+.kp-sugerir p { font: 700 1.3rem/1 var(--fx-font-disp); text-transform: uppercase; margin-bottom: 10px; }
+.kp-sug-fila { display: flex; gap: 12px; overflow-x: auto; padding: 8px 2px 4px; }
+.kp-sug { position: relative; flex: none; display: grid; gap: 6px; min-width: 150px; min-height: 76px; padding: 12px 16px; text-align: left; border-radius: 16px;
+  border: 2px solid var(--fx-line-deep); background: var(--fx-deep); color: var(--fx-bg); cursor: pointer; font: 700 1.1rem/1.2 var(--fx-font-txt); }
+.kp-sug b { color: var(--fx-pop); font-size: 1.15rem; }
+.kp-sug.on { border-color: var(--fx-accent); }
+.kp-sug i { position: absolute; top: -10px; right: -10px; min-width: 28px; height: 28px; padding: 0 7px; border-radius: 999px; display: grid; place-items: center;
+  background: var(--fx-accent); color: var(--fx-sobre-acento, var(--fx-deep)); font: 800 1rem/1 var(--fx-font-txt); font-style: normal; }

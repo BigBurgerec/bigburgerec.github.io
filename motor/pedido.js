@@ -172,9 +172,15 @@
         </div>
         <span class="pd-precio">${plata(precioLinea(l))}</span></li>`;
     }).join('');
+    /* menu.sugerir = { categoria, titulo }: al revisar el pedido se ofrece esa categoría (ej. bebidas) para sumarla con un toque */
+    const sug = !R && M.sugerir ? ((M.categorias.find(c => c.id === M.sugerir.categoria) || {}).items || []) : [];
+    const sugHtml = sug.length ? `<div class="pd-sugerir"><p>${esc(M.sugerir.titulo || '¿Le sumas algo más?')}</p><div class="pd-sugerir-fila">${sug.map(i => {
+      const n = carrito.filter(l => l.id === i.id).reduce((s, l) => s + l.cant, 0);
+      return `<button type="button" class="pd-sug${n ? ' on' : ''}" data-sug="${esc(i.id)}" aria-label="Sumar ${esc(i.nombre)}"><span>${esc(i.nombre)}</span><b>+${plata(i.precio)}</b>${n ? `<i>${n}</i>` : ''}</button>`; }).join('')}</div></div>` : '';
     abrirHoja(`
       <h2 class="pd-hoja-tit">${R ? 'Tu reserva' : 'Tu pedido'}</h2>
       <ul class="pd-lineas">${lineas}</ul>
+      ${sugHtml}
       ${R ? '' : `<p class="pd-subtotal">Subtotal <b>${plata(subtotal())}</b></p>`}
       <div id="pd-totales"></div>
 
@@ -188,6 +194,7 @@
       <button type="button" class="pd-btn pd-btn-full" id="pd-enviar">${R ? 'Reservar por WhatsApp' : 'Enviar pedido por WhatsApp'}</button>`,
       h => {
         h.querySelectorAll('[data-mas]').forEach(b => b.onclick = () => { carrito[b.dataset.mas].cant++; actualizarBarra(); abrirPedido(); });
+        h.querySelectorAll('[data-sug]').forEach(b => b.onclick = () => { agregar(b.dataset.sug, []); abrirPedido(); });
         h.querySelectorAll('[data-menos]').forEach(b => b.onclick = () => {
           const l = carrito[b.dataset.menos]; l.cant--; if (!l.cant) carrito.splice(b.dataset.menos, 1);
           actualizarBarra(); carrito.length ? abrirPedido() : h.close();
