@@ -5,7 +5,7 @@ window.MENU = {
       "id": "clasicas",
       "antes": "Pan tradicional",
       "nombre": "Clásicas",
-      "extras": false,
+      "extras": true,
       "items": [
         {
           "id": "clasica",
@@ -43,7 +43,7 @@ window.MENU = {
       "id": "premium",
       "antes": "Pan de papa artesanal",
       "nombre": "Premium",
-      "extras": false,
+      "extras": true,
       "items": [
         {
           "id": "americana",
@@ -74,7 +74,7 @@ window.MENU = {
       "id": "insignia",
       "antes": "Pan de papa artesanal",
       "nombre": "Insignia",
-      "extras": false,
+      "extras": true,
       "items": [
         {
           "id": "big-mapple",
@@ -129,7 +129,23 @@ window.MENU = {
       ]
     }
   ],
-  "extras": [],
+  "extras": [
+    {
+      "id": "x-carne",
+      "nombre": "Carne extra 140 g",
+      "precio": 150
+    },
+    {
+      "id": "x-queso",
+      "nombre": "Queso cheddar extra",
+      "precio": 50
+    },
+    {
+      "id": "x-tocino",
+      "nombre": "Tocino extra",
+      "precio": 75
+    }
+  ],
   "temporada": null,
   "sugerir": {
     "categoria": "bebidas",

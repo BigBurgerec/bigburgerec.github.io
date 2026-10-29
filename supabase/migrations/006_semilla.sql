@@ -14,7 +14,10 @@ insert into big_burger.productos (clave, nombre, categoria, precio_cent, lema, i
   ('portobello', 'Portobello', 'insignia', 750, 'Pan de papa artesanal', 'Pan de papa artesanal, carne 140 g, queso, tocino, queso labneh, champiñones portobello y salsa de la casa', null, true, true, true, 9),
   ('bebida-gaseosa', 'Gaseosa personal', 'bebidas', 100, null, null, null, false, false, true, 10),
   ('bebida-agua', 'Agua sin gas', 'bebidas', 75, null, null, null, false, false, true, 11),
-  ('bebida-jugo', 'Jugo natural', 'bebidas', 150, null, null, null, false, false, true, 12)
+  ('bebida-jugo', 'Jugo natural', 'bebidas', 150, null, null, null, false, false, true, 12),
+  ('x-carne', 'Carne extra 140 g', 'extras', 150, null, null, null, false, false, true, 13),
+  ('x-queso', 'Queso cheddar extra', 'extras', 50, null, null, null, false, false, true, 14),
+  ('x-tocino', 'Tocino extra', 'extras', 75, null, null, null, false, false, true, 15)
 on conflict (clave) do update set nombre = excluded.nombre, categoria = excluded.categoria, precio_cent = excluded.precio_cent, lema = excluded.lema,
   ingredientes = excluded.ingredientes, foto = excluded.foto, cuenta_burger = excluded.cuenta_burger, controla_stock = excluded.controla_stock, orden = excluded.orden;
 

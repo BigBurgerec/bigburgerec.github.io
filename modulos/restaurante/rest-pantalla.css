@@ -98,3 +98,20 @@ body.kiosco { background: var(--fx-deep-2); color: var(--fx-bg); overscroll-beha
 .kp-sin input:checked + span { border-color: var(--fx-accent); background: var(--fx-accent); color: var(--fx-sobre-acento, var(--fx-deep)); }
 .kp-sin input:checked + span::before { content: "✕"; margin-right: 8px; }
 .kp-sin input:focus-visible + span { outline: 3px solid var(--fx-accent); outline-offset: 2px; }
+
+/* Ventana de extras al agregar una burger */
+.kp-extras { border: 1px solid var(--fx-line-deep); border-radius: 24px; background: var(--fx-deep); color: var(--fx-bg); padding: 26px; width: min(640px, 92vw); }
+.kp-extras::backdrop { background: rgba(0, 0, 0, .7); }
+.kp-extras h2 { font: 700 2rem/1 var(--fx-font-disp); text-transform: uppercase; }
+.kp-extras p { margin: 10px 0 16px; font: 700 1.2rem var(--fx-font-txt); }
+.kp-extras p small { display: block; font-weight: 400; color: var(--fx-soft-2); font-size: 1rem; }
+.kp-extras-fila { display: grid; gap: 10px; }
+.kp-extras-fila label { position: relative; }
+.kp-extras-fila input { position: absolute; opacity: 0; inset: 0; }
+.kp-extras-fila span { display: flex; justify-content: flex-start; gap: 10px; align-items: center; min-height: 64px; padding: 0 20px; border-radius: 16px; border: 2px solid var(--fx-line-deep);
+  font: 700 1.2rem var(--fx-font-txt); cursor: pointer; }
+.kp-extras-fila span b { color: var(--fx-pop); margin-left: auto; }
+.kp-extras-fila input:checked + span { border-color: var(--fx-accent); background: color-mix(in srgb, var(--fx-accent) 18%, var(--fx-deep)); }
+.kp-extras-fila input:checked + span::before { content: "✓"; color: var(--fx-pop); margin-right: 10px; }
+.kp-extras-fila input:focus-visible + span { outline: 3px solid var(--fx-accent); outline-offset: 2px; }
+.kp-extras-acc { display: grid; grid-template-columns: 1fr 2fr; gap: 12px; margin-top: 20px; }

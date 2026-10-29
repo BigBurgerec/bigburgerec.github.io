@@ -6,7 +6,7 @@
   const { $, $$, esc, plata, aviso } = window.RUI, R = window.RESTDATA;
   const INACTIVO_MS = 90000, LISTO_MS = 15000;
   const carrito = new Map();                 // clave → cantidad
-  let productos = [], cat = null, timerInactivo = null, timerListo = null, enviando = false;
+  let productos = [], extras = [], todos = [], cat = null, timerInactivo = null, timerListo = null, enviando = false;
 
   /* foto de cada producto: solo la suya (el recorte de la vitrina). La foto de la categoría va en su pestaña, no en cada burger: no se muestra una burger por otra */
   const fotoDe = p => { const v = (R.vitrina || []).find(x => x.id === p.clave); return v ? { src: v.corte, alt: v.alt } : null; };
@@ -30,8 +30,9 @@
 
   /* ---------- carta en vivo (precios y agotados vienen de la base) ---------- */
   async function cargar() {
-    try { const c = await window.REST.rpc('carta'); productos = c.productos.filter(p => p.categoria !== 'extras'); }
-    catch (e) { productos = (R.productos || []).filter(p => p.categoria !== 'extras').map(p => ({ ...p, agotado: false })); aviso('Sin conexión: la carta puede no estar al día.', true); }
+    try { todos = (await window.REST.rpc('carta')).productos; }
+    catch (e) { todos = (R.productos || []).map(p => ({ ...p, agotado: false })); aviso('Sin conexión: la carta puede no estar al día.', true); }
+    productos = todos.filter(p => p.categoria !== 'extras'); extras = todos.filter(p => p.categoria === 'extras' && !p.agotado);
   }
 
   function pintarMenu() {
@@ -47,12 +48,27 @@
         <div class="kp-prod-pie"><b>${plata(p.precio_cent)}</b>
           ${p.agotado ? '' : n ? `<span class="kp-cant"><button type="button" data-menos="${esc(p.clave)}" aria-label="Quitar uno de ${esc(p.nombre)}">−</button><b>${n}</b><button type="button" data-mas="${esc(p.clave)}" aria-label="Sumar uno de ${esc(p.nombre)}">+</button></span>`
             : `<button type="button" class="rest-btn" data-mas="${esc(p.clave)}">Agregar</button>`}</div></article>`; }).join('');
-    $$('[data-mas]', $('#kp-grilla')).forEach(b => b.onclick = () => { sumar(b.dataset.mas, 1); pintarMenu(); });
+    $$('[data-mas]', $('#kp-grilla')).forEach(b => b.onclick = () => {
+      const p = productos.find(x => x.clave === b.dataset.mas);
+      if (p && p.cuenta_burger && extras.length) abrirExtras(p); else { sumar(b.dataset.mas, 1); pintarMenu(); } });
     $$('[data-menos]', $('#kp-grilla')).forEach(b => b.onclick = () => { sumar(b.dataset.menos, -1); pintarMenu(); });
     pintarPie();
   }
+  /* Extras (carne, queso, tocino…): al agregar una burger se ofrecen en una ventana; van como productos aparte y la base calcula su precio (§4.5) */
+  function abrirExtras(p) {
+    let d = $('#kp-extras');
+    if (!d) { d = document.createElement('dialog'); d.id = 'kp-extras'; d.className = 'kp-extras'; document.body.appendChild(d); }
+    const sel = new Set(), total = () => p.precio_cent + [...sel].reduce((s, c) => s + extras.find(x => x.clave === c).precio_cent, 0);
+    d.innerHTML = `<h2>${esc(p.nombre)}</h2><p>¿Le subimos el nivel? <small>Extras opcionales</small></p>
+      <div class="kp-extras-fila">${extras.map(x => `<label><input type="checkbox" value="${esc(x.clave)}"><span>${esc(x.nombre)}<b>+${plata(x.precio_cent)}</b></span></label>`).join('')}</div>
+      <div class="kp-extras-acc"><button type="button" class="rest-btn sec kp-grande" data-x="no">Cancelar</button><button type="button" class="rest-btn kp-grande" data-x="si">Agregar · <span id="kp-x-tot">${plata(p.precio_cent)}</span></button></div>`;
+    $$('input', d).forEach(c => c.onchange = () => { c.checked ? sel.add(c.value) : sel.delete(c.value); $('#kp-x-tot', d).textContent = plata(total()); });
+    $('[data-x=no]', d).onclick = () => d.close();
+    $('[data-x=si]', d).onclick = () => { sumar(p.clave, 1); sel.forEach(c => sumar(c, 1)); d.close(); pintarMenu(); };
+    d.showModal();
+  }
   function sumar(clave, d) { const n = Math.max(0, Math.min(20, (carrito.get(clave) || 0) + d)); n ? carrito.set(clave, n) : carrito.delete(clave); }
-  const lineas = () => [...carrito].map(([c, n]) => ({ p: productos.find(x => x.clave === c), n })).filter(x => x.p);
+  const lineas = () => [...carrito].map(([c, n]) => ({ p: todos.find(x => x.clave === c), n })).filter(x => x.p);
   const subtotal = () => lineas().reduce((s, x) => s + x.p.precio_cent * x.n, 0);
   function pintarPie() {
     const n = lineas().reduce((s, x) => s + x.n, 0); $('#kp-pie').hidden = !n;
