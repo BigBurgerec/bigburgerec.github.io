@@ -3,4 +3,5 @@ Allow: /
 Disallow: /personal.html
 Disallow: /dashboard.html
 Disallow: /pantalla.html
+Disallow: /manual.html
 Sitemap: https://bigburgerec.github.io/sitemap.xml

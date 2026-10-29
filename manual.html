@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#121212">
+<title>Manual · Big Burger</title>
+<meta name="description" content="Manual de uso del sistema de Big Burger: la página, la tablet del local, la caja y el dashboard del dueño.">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&family=Barlow:wght@400;600;700;800&display=swap">
+<!-- Manual para el dueño y el equipo de Big Burger. Página fija (no la genera nuevo-cliente.py): vive en landing-base/clientes/big-burger/sitio-extra/ y se copia al publicar.
+     Sin correos ni claves: el repo es público. -->
+<style>
+:root { --bg: #121212; --card: #1A1A1A; --line: #2E2E2E; --ink: #F2F0EA; --mut: #A9A59D; --rojo: #E60202; --rojo-txt: #FF4D4D; --oro: #E1AC25;
+  --disp: "Oswald", Impact, "Arial Narrow", sans-serif; --txt: "Barlow", Arial, sans-serif; color-scheme: dark; }
+* { box-sizing: border-box; margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 400 1.06rem/1.55 var(--txt); }
+.wrap { width: min(860px, 100% - 32px); margin-inline: auto; }
+header.top { padding: 28px 0 8px; display: flex; align-items: center; gap: 14px; }
+header.top img { width: 56px; height: 56px; }
+header.top b { font: 700 1.5rem/1 var(--disp); text-transform: uppercase; letter-spacing: .02em; }
+header.top small { display: block; color: var(--mut); font-size: .95rem; margin-top: 4px; }
+h1 { font: 700 clamp(2.4rem, 8vw, 4rem)/.95 var(--disp); text-transform: uppercase; margin: 28px 0 14px; }
+h1 span { display: block; font-weight: 300; color: var(--rojo-txt); font-size: .45em; letter-spacing: .04em; margin-bottom: .45em; }
+.lead { font-size: 1.2rem; color: #D9D6CF; max-width: 60ch; }
+nav.indice { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 6px; }
+nav.indice a { color: var(--ink); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font: 600 .95rem var(--txt); }
+section { padding: 34px 0; border-top: 1px solid var(--line); margin-top: 26px; }
+h2 { font: 700 clamp(1.7rem, 5vw, 2.4rem)/1 var(--disp); text-transform: uppercase; margin-bottom: 14px; }
+h2::before { content: ""; display: inline-block; width: 1em; height: 3px; background: var(--rojo); vertical-align: middle; margin-right: .4em; }
+h3 { font: 700 1.2rem var(--txt); margin: 20px 0 8px; }
+p { margin: 0 0 12px; max-width: 68ch; }
+ol, ul { padding-left: 1.3em; margin: 0 0 12px; } li { margin: 6px 0; }
+a { color: var(--rojo-txt); }
+.tarjetas { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); }
+.tarjeta { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 20px; }
+.tarjeta .tit { font: 700 1.35rem/1 var(--disp); text-transform: uppercase; }
+.tarjeta .quien { color: var(--mut); font-size: .95rem; margin: 6px 0 10px; }
+.boton { display: inline-flex; align-items: center; min-height: 48px; padding: 0 20px; border-radius: 999px; background: var(--rojo); color: #fff; text-decoration: none; font: 800 1rem var(--txt); margin-top: 6px; }
+.tabla { width: 100%; border-collapse: collapse; margin: 6px 0 14px; }
+.tabla th, .tabla td { text-align: left; vertical-align: top; padding: 12px 10px; border-bottom: 1px solid var(--line); }
+.tabla th { font: 700 .9rem var(--txt); color: var(--mut); text-transform: uppercase; letter-spacing: .04em; }
+@media (max-width: 620px) { .tabla, .tabla tbody, .tabla tr, .tabla td { display: block; width: 100%; } .tabla thead { display: none; }
+  .tabla tr { border-bottom: 1px solid var(--line); padding: 8px 0; } .tabla td { border: 0; padding: 4px 0; } .tabla td:first-child { font-weight: 700; } }
+.nota { background: var(--card); border-left: 4px solid var(--oro); border-radius: 10px; padding: 14px 16px; color: #D9D6CF; }
+.diagrama { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 10px; margin: 8px 0 14px; overflow-x: auto; }
+.diagrama svg { width: 100%; min-width: 560px; height: auto; display: block; }
+.tareas { list-style: none; padding: 0; } .tareas li::before { content: "☐"; color: var(--oro); margin-right: 10px; }
+footer { padding: 30px 0 50px; color: var(--mut); font-size: .95rem; border-top: 1px solid var(--line); margin-top: 26px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><img src="assets/logo.webp" alt="" width="56" height="56"><div><b>Big Burger</b><small>Manual de tu sistema</small></div></header>
+
+<h1><span>Manual</span>Cómo funciona tu sistema</h1>
+<p class="lead">Tu sistema tiene cuatro pantallas: la página donde piden tus clientes, la tablet del local, la caja y tu dashboard. Aquí están los enlaces, quién entra a cada una y qué se puede hacer.</p>
+<nav class="indice" aria-label="Contenido"><a href="#enlaces">Enlaces</a><a href="#pedido">Cómo llega un pedido</a><a href="#pagina">La página</a><a href="#tablet">La tablet</a><a href="#caja">La caja</a><a href="#dashboard">Dashboard</a><a href="#falla">Si algo falla</a><a href="#falta">Lo que falta</a></nav>
+
+<section id="enlaces">
+<h2>Tus enlaces</h2>
+<p>Guárdalos en el celular o en favoritos. Cada pantalla pide la cuenta y la clave que te entregamos aparte; si se te olvida una, escríbenos y la cambiamos.</p>
+<div class="tarjetas">
+  <div class="tarjeta"><div class="tit">La página</div><div class="quien">Cualquier persona, sin clave</div><p>Tus clientes ven la carta y hacen su pedido.</p><a class="boton" href="./">Abrir la página</a></div>
+  <div class="tarjeta"><div class="tit">Tablet del local</div><div class="quien">Cuenta de la tablet</div><p>El cliente pide solo en el local y paga en caja.</p><a class="boton" href="pantalla.html">Abrir la tablet</a></div>
+  <div class="tarjeta"><div class="tit">Caja</div><div class="quien">Cuenta de la caja (o la del dueño)</div><p>Confirmar pedidos, vender en mostrador y anular errores.</p><a class="boton" href="personal.html">Abrir la caja</a></div>
+  <div class="tarjeta"><div class="tit">Dashboard</div><div class="quien">Cuenta del dueño (Renato)</div><p>Ventas en vivo, stock del día y equipo.</p><a class="boton" href="dashboard.html">Abrir el dashboard</a></div>
+</div>
+<p style="margin-top:14px">Cada cuenta ve solo lo suyo: la tablet solo crea pedidos, la caja no ve el dashboard y el dueño entra a todo. Los pedidos por WhatsApp llegan al <b>096 071 7171</b>.</p>
+</section>
+
+<section id="pedido">
+<h2>Cómo llega un pedido</h2>
+<div class="diagrama">
+<svg viewBox="0 0 760 262" role="img" aria-label="Todo pedido espera en la caja antes de entrar a cocina" font-family="Barlow, Arial, sans-serif" font-size="13">
+  <defs><marker id="flecha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8a8680"/></marker></defs>
+  <text x="24" y="34" font-size="15" font-weight="700" fill="#F2F0EA">Todo pedido espera en la caja antes de entrar a cocina</text>
+  <g fill="none" stroke="#8a8680" stroke-width="1.25">
+    <path d="M188 110H207V150H226" marker-end="url(#flecha)"/><path d="M188 210H207V170H226" marker-end="url(#flecha)"/>
+    <path d="M394 150H412V110H430" marker-end="url(#flecha)"/><path d="M394 170H412V210H430" marker-end="url(#flecha)"/>
+    <path d="M570 110H612" marker-end="url(#flecha)"/>
+  </g>
+  <g fill="none" stroke="#5a5650" stroke-width="1.25">
+    <rect x="20" y="82" width="168" height="56" rx="8"/><rect x="20" y="182" width="168" height="56" rx="8"/>
+    <rect x="430" y="82" width="140" height="56" rx="8"/><rect x="430" y="182" width="140" height="56" rx="8"/><rect x="612" y="82" width="124" height="56" rx="8"/>
+  </g>
+  <rect x="226" y="124" width="168" height="72" rx="8" fill="#E60202" fill-opacity=".16" stroke="#E60202" stroke-width="2"/>
+  <g text-anchor="middle">
+    <text x="104" y="106" font-weight="700" fill="#F2F0EA">Página web</text><text x="104" y="122" font-size="11.5" fill="#A9A59D">también abre WhatsApp</text>
+    <text x="104" y="206" font-weight="700" fill="#F2F0EA">Tablet del local</text><text x="104" y="222" font-size="11.5" fill="#A9A59D">se paga en caja</text>
+    <text x="310" y="148" font-weight="700" fill="#F2F0EA">Caja</text><text x="310" y="164" font-size="11.5" fill="#F2F0EA">pedido pendiente</text><text x="310" y="180" font-size="11.5" fill="#F2F0EA">suena un aviso</text>
+    <text x="310" y="222" font-size="11.5" fill="#A9A59D">Sin respuesta en 3 h: vence</text>
+    <text x="500" y="106" font-weight="700" fill="#F2F0EA">Confirmar</text><text x="500" y="122" font-size="11.5" fill="#A9A59D">entra a cocina</text>
+    <text x="500" y="206" font-weight="700" fill="#F2F0EA">Rechazar</text><text x="500" y="222" font-size="11.5" fill="#A9A59D">no cuenta como venta</text>
+    <text x="674" y="106" font-weight="700" fill="#F2F0EA">Dashboard</text><text x="674" y="122" font-size="11.5" fill="#A9A59D">venta y stock</text>
+  </g>
+</svg>
+</div>
+<p>Los pedidos de la web y de la tablet llegan a la misma caja. Solo al confirmarlos cuentan como venta, bajan el stock y aparecen en tu dashboard.</p>
+</section>
+
+<section id="pagina">
+<h2>La página (tus clientes)</h2>
+<p>Tu cliente arma su pedido en un minuto y te llega completo a la caja y por WhatsApp.</p>
+<ol>
+  <li>Ve tus burgers Insignia en grande, con lo que lleva cada una y cuántas quedan hoy.</li>
+  <li>Elige de la carta (Clásicas, Premium, Insignia y Bebidas) y toca «Agregar».</li>
+  <li>Al agregar una burger puede sumar extras: carne, queso o tocino.</li>
+  <li>En «Ver pedido» le sugerimos una bebida con un toque.</li>
+  <li>Pone su nombre y celular, elige «Para llevar» y envía.</li>
+  <li>El pedido queda guardado en tu caja y se abre WhatsApp con todo el detalle hacia el 096 071 7171.</li>
+</ol>
+<p>Los precios y el total los calcula el sistema: nadie puede cambiarlos desde el celular. Un cliente no puede mandar más de 3 pedidos por hora con el mismo celular.</p>
+<p class="nota">Por ahora la página solo acepta pedidos para llevar. «A domicilio» se enciende cuando nos pases los sectores de entrega con su costo.</p>
+</section>
+
+<section id="tablet">
+<h2>La tablet del local</h2>
+<p>Se activa una sola vez y queda lista para que tus clientes pidan solos.</p>
+<h3>Activarla (una vez)</h3>
+<ol>
+  <li>En la tablet, abre <a href="pantalla.html">bigburgerec.github.io/pantalla.html</a>.</li>
+  <li>Entra con la cuenta de la tablet. La sesión queda guardada en esa tablet.</li>
+  <li>En el menú del navegador toca «Instalar app» o «Agregar a la pantalla de inicio»: se abre a pantalla completa, sin barra del navegador.</li>
+</ol>
+<h3>Cómo pide el cliente</h3>
+<ol>
+  <li>Toca «Toca para pedir».</li>
+  <li>Elige la categoría y toca «Agregar»; en las burgers puede sumar extras (carne, queso, tocino).</li>
+  <li>En «Tu pedido» puede sumar una bebida, escribe su nombre y elige «Comer aquí» o «Para llevar».</li>
+  <li>Si no quiere algo, toca «Sin cebolla», «Sin tomate», etc.</li>
+  <li>Toca «Enviar pedido»: sale su número de pedido y el total a pagar en caja.</li>
+</ol>
+<p>Si nadie toca la tablet por 90 segundos, vuelve sola al inicio y borra el pedido a medias. Para cerrar la sesión de la tablet, mantén presionado el logo de la pantalla de inicio durante 5 segundos.</p>
+</section>
+
+<section id="caja">
+<h2>La caja</h2>
+<p>La caja confirma cada pedido antes de que entre a cocina; hasta entonces no cuenta como venta ni descuenta stock. Tiene tres pestañas:</p>
+<table class="tabla">
+  <thead><tr><th>Pestaña</th><th>Qué se hace</th></tr></thead>
+  <tbody>
+    <tr><td>Pedidos</td><td>Llegan los de la web y los de la tablet, con un sonido. Cada uno dice de dónde viene (Web o Pantalla del local), si es para comer aquí o para llevar, «Pagar en caja» y lo que el cliente no quiere. Se toca «Confirmar» o «Rechazar».</td></tr>
+    <tr><td>Vender</td><td>Para lo que se vende en el mostrador: se tocan las burgers, se revisa el total y «Registrar venta».</td></tr>
+    <tr><td>Mis ventas</td><td>Lo vendido hoy. Desde aquí se anula un error, escribiendo el motivo.</td></tr>
+  </tbody>
+</table>
+<ul>
+  <li><b>Sonido:</b> el botón «Sonido» lo prende o lo apaga. Si no suena, toca una vez cualquier parte de la pantalla: el navegador lo pide.</li>
+  <li><b>Pedidos que vencen:</b> un pedido sin confirmar vence a las 3 horas; ya solo se puede rechazar.</li>
+  <li><b>Anular:</b> la caja puede anular sus propias ventas hasta 10 minutos después. Pasado ese tiempo, solo el dueño. Las ventas nunca se borran: quedan como anuladas y el stock vuelve.</li>
+</ul>
+</section>
+
+<section id="dashboard">
+<h2>Tu dashboard (Renato)</h2>
+<p>Desde el celular ves en vivo cuántas hamburguesas salen hoy y cuántas quedan, sin preguntarle a nadie. Se actualiza solo cada pocos segundos.</p>
+<p><b>Cada mañana:</b> toca «Cargar stock de hoy» y pon cuántas hay de cada burger. El stock baja solo con cada venta confirmada y avisa cuando quedan pocas; en la página tus clientes ven «Quedan N hoy». Si no cargas el stock de una burger, se vende sin límite.</p>
+<h3>Lo que ves</h3>
+<ul>
+  <li>Hamburguesas vendidas hoy, ingresos y ticket promedio, comparados con el mismo día de la semana pasada.</li>
+  <li>Hamburguesas por hora y por canal (en el local, para llevar, a domicilio).</li>
+  <li>Qué se vende y qué queda de cada burger.</li>
+  <li>Movimientos en vivo, los últimos 7 días y lo que vendió cada persona del equipo.</li>
+  <li>Los pedidos que esperan confirmación en la caja.</li>
+</ul>
+<p>Las bebidas y los extras suman a los ingresos, pero no cuentan como hamburguesas vendidas.</p>
+</section>
+
+<section id="falla">
+<h2>Si algo falla</h2>
+<table class="tabla">
+  <thead><tr><th>Pasa esto</th><th>Haz esto</th></tr></thead>
+  <tbody>
+    <tr><td>Se te olvidó una clave</td><td>Escríbenos y la cambiamos; nadie puede crearse una cuenta por su cuenta.</td></tr>
+    <tr><td>La caja no suena</td><td>Revisa que el botón diga «Sonido: sí» y toca una vez la pantalla. Deja la caja abierta en primer plano.</td></tr>
+    <tr><td>La tablet pide clave otra vez</td><td>Entra de nuevo con la cuenta de la tablet. Pasa si se borraron los datos del navegador.</td></tr>
+    <tr><td>Un pedido no aparece en la caja</td><td>Revisa el internet del local. El de la web igual te llega por WhatsApp.</td></tr>
+    <tr><td>Una burger dice «Agotada»</td><td>Se acabó el stock que cargaste. Desde el dashboard, «Cargar stock de hoy» permite subir la cantidad.</td></tr>
+    <tr><td>Un cliente se equivocó</td><td>Anula la venta en «Mis ventas» con el motivo; si pasaron más de 10 minutos, lo hace el dueño.</td></tr>
+  </tbody>
+</table>
+<p>Para cualquier otra cosa, escríbenos con una captura de lo que ves.</p>
+</section>
+
+<section id="falta">
+<h2>Lo que falta completar</h2>
+<p>Con estos datos dejamos la página sin textos provisionales y encendemos los pedidos a domicilio.</p>
+<ul class="tareas">
+  <li>Extras oficiales con su precio (hoy son de ejemplo: carne $1.50, queso $0.50, tocino $0.75).</li>
+  <li>Bebidas reales con su precio (hoy son de ejemplo: gaseosa $1.00, agua $0.75, jugo $1.50).</li>
+  <li>Dirección del local, zona y horario de cada día.</li>
+  <li>Ubicación en Google Maps, Instagram y Facebook.</li>
+  <li>Sectores de entrega a domicilio y el costo de cada uno.</li>
+  <li>Fotos originales de cada burger en alta calidad.</li>
+</ul>
+</section>
+
+<footer>Big Burger · Ambato · Manual actualizado el 29 de octubre de 2026</footer>
+</div>
+</body>
+</html>
