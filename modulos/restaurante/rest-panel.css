@@ -185,3 +185,10 @@ dialog.rest-dialogo .acc { display: flex; gap: 10px; margin-top: 14px; justify-c
 .rp-tag.caja { background: transparent; border: 1px solid currentColor; }
 .rp-item.de-pantalla { border-color: color-mix(in srgb, var(--fx-accent) 55%, transparent); }
 .rp-nota { font-weight: 700; }
+
+/* Pedido de la pantalla del local que lleva rato esperando: naranja y luego rojo (con texto, no solo color) */
+.rp-item.demora-naranja { border-color: #f28c28; background: color-mix(in srgb, #f28c28 14%, var(--d-card, var(--fx-deep))); }
+.rp-item.demora-roja { border-color: var(--d-crit, #d03b3b); border-width: 2px; background: color-mix(in srgb, var(--d-crit, #d03b3b) 18%, var(--d-card, var(--fx-deep))); }
+.rp-espera { display: inline-block; margin-left: 8px; padding: 4px 10px; border-radius: 999px; font: 800 .82rem/1 var(--fx-font-txt); text-transform: uppercase; letter-spacing: .03em; vertical-align: middle; }
+.demora-naranja .rp-espera { background: #f28c28; color: #1a1a1a; }
+.demora-roja .rp-espera { background: var(--d-crit, #d03b3b); color: #fff; }

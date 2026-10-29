@@ -38,6 +38,10 @@
 
   /* ---------- pedidos que esperan a la caja: de la web (también llegan por WhatsApp) y de la pantalla del local (se pagan en caja) ---------- */
   const mapsOk = u => /^https:\/\/(www\.google\.com\/maps|maps\.google\.com|maps\.app\.goo\.gl|goo\.gl\/maps)([/?#]|$)/.test(u || '');
+  /* Pedidos de la pantalla del local que esperan: naranja desde los N min y rojo desde los M (restaurante.pantalla.alerta_min, por defecto [4, 8]) */
+  const ALERTA = (R.pantalla_alerta && R.pantalla_alerta.length === 2) ? R.pantalla_alerta : [4, 8];
+  const espera = p => Math.floor((Date.now() - new Date(p.creado)) / 60000);
+  const demora = p => { if (p.origen !== 'pantalla' || p.vencido) return ''; const m = espera(p); return m >= ALERTA[1] ? ' demora-roja' : m >= ALERTA[0] ? ' demora-naranja' : ''; };
   const etiquetas = p => { const o = p.origen || 'web';
     return `<span class="rp-tag origen-${esc(o)}">${esc(origenTxt(o))}</span> <span class="rp-tag ${o === 'pantalla' ? 'local' : esc(p.canal)}">${esc(o === 'pantalla' ? modoTxt(p.modo) : canalTxt(p.canal))}</span>`
       + (o === 'pantalla' ? ' <span class="rp-tag caja">Pagar en caja</span>' : '') + (p.vencido ? ' <span class="rp-tag vencido">Venció</span>' : ''); };
@@ -65,7 +69,7 @@
       if (!primeraCarga && nuevos.length) { sonar(nuevos.some(p => p.origen === 'pantalla') ? 'pantalla' : 'web'); aviso(`Pedido nuevo #${nuevos[nuevos.length - 1].numero} · ${origenTxt(nuevos[nuevos.length - 1].origen || 'web')}`); }
       primeraCarga = false;
       const vivos = ps.filter(p => !p.vencido).length; n.hidden = !vivos; n.textContent = vivos;
-      $('#rp-pedidos').innerHTML = ps.length ? ps.map(p => `<article class="rest-tarjeta rp-item${p.origen === 'pantalla' ? ' de-pantalla' : ''}"><header><h3>#${p.numero} · ${esc(p.cliente)}</h3><span>${etiquetas(p)}</span></header>
+      $('#rp-pedidos').innerHTML = ps.length ? ps.map(p => `<article class="rest-tarjeta rp-item${p.origen === 'pantalla' ? ' de-pantalla' : ''}${demora(p)}"><header><h3>#${p.numero} · ${esc(p.cliente)}${demora(p) ? ` <span class="rp-espera">Esperando ${espera(p)} min</span>` : ''}</h3><span>${etiquetas(p)}</span></header>
         <p><b>${p.lineas.map(l => `${l.cantidad}× ${esc(l.nombre)}`).join(' · ')}</b></p>
         <p>Total <b>${plata(p.total_cent)}</b>${p.envio_cent ? ` (incluye envío ${plata(p.envio_cent)})` : ''} · llegó ${hace(p.creado)}${p.programado ? ` · para las ${hhmm(p.programado)}` : ''}</p>
         ${p.canal === 'domicilio' ? `<p>${esc(p.sector)} · ${esc(p.direccion)} ${mapsOk(p.maps_url) ? `· <a class="enlace" href="${esc(p.maps_url)}" target="_blank" rel="noopener">Abrir en Google Maps</a>` : ''}</p>` : ''}
@@ -129,7 +133,8 @@
     yo = u; $('#rp-app').hidden = false; $('#rp-quien').textContent = `${u.nombre} · ${u.rol === 'admin' ? 'Dueño' : 'Ventas'}`; stock(); pedidos(); ventas(); pintarTicket();
     const h = location.hash.slice(1); if (['pedidos', 'ventas'].includes(h)) pestana(h);
     timer = setInterval(() => { if (!document.hidden) { stock(); pedidos(); } }, 6000);
-    setInterval(() => { if (document.hidden) pedidos(); }, 20000);   // con la pestaña en segundo plano igual avisa (más espaciado) window.addEventListener('storage', () => { stock(); pedidos(); ventas(); });
+    setInterval(() => { if (document.hidden) pedidos(); }, 20000);   // con la pestaña en segundo plano igual avisa (más espaciado)
+    window.addEventListener('storage', () => { stock(); pedidos(); ventas(); });
   }
   window.RUI.sesion({ raiz: $('#rp-entrada'), roles: ['vendedor', 'admin'], titulo: R.personal_txt.entrada_titulo, texto: R.personal_txt.entrada_texto, alEntrar });
 })();
