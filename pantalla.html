@@ -68,7 +68,9 @@
         <label><input type="radio" name="modo" value="aqui" required><span>Comer aquí</span></label>
         <label><input type="radio" name="modo" value="llevar"><span>Para llevar</span></label>
       </fieldset>
-      <label class="rest-campo">Nota para cocina (opcional)<textarea name="nota" maxlength="200" rows="2" placeholder="Ej.: sin cebolla"></textarea></label>
+      <fieldset class="kp-sin"><legend>¿Algo que no quieras? <small>Toca para quitarlo (opcional)</small></legend>
+        <label><input type="checkbox" name="sin" value="Sin cebolla"><span>Sin cebolla</span></label><label><input type="checkbox" name="sin" value="Sin tomate"><span>Sin tomate</span></label><label><input type="checkbox" name="sin" value="Sin lechuga"><span>Sin lechuga</span></label><label><input type="checkbox" name="sin" value="Sin salsa"><span>Sin salsa</span></label><label><input type="checkbox" name="sin" value="Sin queso"><span>Sin queso</span></label><label><input type="checkbox" name="sin" value="Sin tocino"><span>Sin tocino</span></label>
+      </fieldset>
       <div class="kp-pago"><b>Forma de pago</b><span>Pagas en caja al retirar tu pedido (efectivo o transferencia).</span></div>
       <p class="rest-error" id="kp-error" role="alert" hidden></p>
       <button type="submit" class="rest-btn kp-grande" id="kp-enviar">Enviar pedido</button>

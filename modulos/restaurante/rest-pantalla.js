@@ -81,7 +81,7 @@
     if (!f.modo.value) { err.textContent = 'Elige comer aquí o para llevar.'; err.hidden = false; return; }
     enviando = true; btn.disabled = true; btn.textContent = 'Enviando…';
     try {
-      const r = await window.REST.rpc('pedido_local', { p_nombre: f.nombre.value.trim(), p_modo: f.modo.value, p_nota: f.nota.value.trim() || null,
+      const r = await window.REST.rpc('pedido_local', { p_nombre: f.nombre.value.trim(), p_modo: f.modo.value, p_nota: [...f.querySelectorAll('input[name=sin]:checked')].map(x => x.value).join(', ') || null,   // «Sin cebolla, Sin tomate» llega a caja como nota para cocina
         p_lineas: [...carrito].map(([producto, cantidad]) => ({ producto, cantidad })) });
       $('#kp-numero').textContent = r.numero; $('#kp-pagar').textContent = plata(r.total_cent);
       carrito.clear(); ir('listo');
